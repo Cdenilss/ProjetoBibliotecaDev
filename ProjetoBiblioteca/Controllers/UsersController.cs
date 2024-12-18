@@ -27,7 +27,6 @@ namespace ProjetoBiblioteca.Controllers
         public IActionResult PostProfilePicture(IFormFile file)
         {
             var description = $"File : {file.FileName}, Tamanho: {file.Length}";
-            // processar a imagem
             return Ok(description);
         }
     }

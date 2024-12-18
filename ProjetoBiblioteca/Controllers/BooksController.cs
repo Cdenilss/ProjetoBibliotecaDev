@@ -8,13 +8,13 @@ namespace ProjetoBiblioteca.Controllers{
 
 public class BooksController : ControllerBase
 {
-    // GET api/books/search
+
     [HttpGet ("search")]
     public IActionResult Get(string search)
     {
         return Ok();
     }
-    // GET api/books/1
+    
     [HttpGet("{id}")]
 
     public IActionResult GetById(int id)
@@ -22,22 +22,25 @@ public class BooksController : ControllerBase
         return Ok();
         
     }
-    // GET api/All-books
+    
     [HttpGet]
     public IActionResult GetAll()
     {
         return Ok();
     }
     
-    //POST api/books
+     
     [HttpPost]
     public IActionResult Post(CreateBooksInputModel model)
     {
         return CreatedAtAction(nameof(GetById), new { id = 1 }, model);
     }
-    
-    //DELATE api/books/{1}
 
+    [HttpPut("{id}")]
+    public IActionResult PutBook()
+    {
+        return NoContent();
+    }
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
