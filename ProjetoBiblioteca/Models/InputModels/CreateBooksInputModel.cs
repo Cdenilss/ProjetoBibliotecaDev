@@ -7,5 +7,5 @@ public class CreateBooksInputModel
     public string Autor { get; set; }
     public string ISBN { get; set; }
     public int AnoDePublicacao { get; set; }
-    public int Preco { get; set; }
+  
 }
