@@ -21,6 +21,9 @@ public class User: BaseEntity
     public bool Active { get; private set; }
 
     public List<Loan> LoansList { get; private set; }
+    
+    public Loan Loan{ get; private set; }
+    public Book Book { get; private set; }
 
 
 
