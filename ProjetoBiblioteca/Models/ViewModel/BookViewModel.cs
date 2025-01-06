@@ -19,4 +19,7 @@ public class BookViewModel
     public string Autor { get; set; }
     public int AnoDePublicacao { get; set; }
     public int TotalLoans { get; private set; }
+
+    public static BookViewModel FromEntity(Book book)
+        => new(book.Id, book.Titulo, book.Autor, book.AnoDePublicacao,new List<Loan>());
 }

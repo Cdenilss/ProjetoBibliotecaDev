@@ -24,12 +24,16 @@ public class User: BaseEntity
     
     public Loan Loan{ get; private set; }
     public Book Book { get; private set; }
-
-
-
-    public void  Update(string email)
-    { 
+    protected User() { }
+   
+    public User(string fullName, string email)
+        : base()
+    {
+        // Guarda os valores
+        Name = fullName;
         Email = email;
+        Active = true;
+        LoansList= [];
     }
-        
+    
 }

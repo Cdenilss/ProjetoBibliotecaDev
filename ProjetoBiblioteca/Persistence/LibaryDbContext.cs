@@ -12,7 +12,7 @@ public class LibaryDbContext : DbContext
     }
 
     public DbSet<Book> Books { get;  set; }
-    public DbSet<User> User { get;  set; }
+    public DbSet<User> Users { get;  set; }
     public DbSet<Loan> Loans { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -27,14 +27,16 @@ public class LibaryDbContext : DbContext
             e.HasKey(u => u.Id);
             e.HasMany(u => u.LoansList)
                 .WithOne(l => l.User)
-                .HasForeignKey(l => l.IdUser);
+                .HasForeignKey(l => l.IdUser)
+                .OnDelete(DeleteBehavior.Restrict);
         });
         builder.Entity<Loan >(e =>
         {
             e.HasKey(l => l.Id);
             e.HasOne(l => l.Book)
-                .WithMany()
-                .HasForeignKey(l => l.IdBook);
+                .WithMany(b=>b.Loans)
+                .HasForeignKey(l => l.IdBook)
+                .OnDelete(DeleteBehavior.Restrict);
         });
         
 

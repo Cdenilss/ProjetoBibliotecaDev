@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using ProjetoBiblioteca.ExceptionHandler;
+using ProjetoBiblioteca.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddExceptionHandler<ApiExceptionHandler>();
 builder.Services.AddProblemDetails();
+
+builder.Services.AddDbContext<LibaryDbContext>(o => o.UseInMemoryDatabase("LibaryDb"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

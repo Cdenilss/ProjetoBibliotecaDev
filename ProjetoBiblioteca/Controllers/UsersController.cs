@@ -22,9 +22,15 @@ namespace ProjetoBiblioteca.Controllers
             return CreatedAtAction(nameof(GetById), new { id = 1 }, model);
             
         }
-
+        
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, UpdateUserInputModel model)
+        {
+            
+            return Ok();
+        }
         [HttpPut("{id}/profile-picture")]
-        public IActionResult PostProfilePicture(IFormFile file)
+        public IActionResult PutProfilePicture(IFormFile file)
         {
             var description = $"File : {file.FileName}, Tamanho: {file.Length}";
             return Ok(description);

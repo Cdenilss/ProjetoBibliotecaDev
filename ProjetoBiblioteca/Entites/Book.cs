@@ -13,7 +13,7 @@ public class Book: BaseEntity
         Autor = autor;
         ISBN = isbn;
         AnoDePublicacao = anoDePublicacao;
-        Status = BookStatusEnum.Disponivel;
+        Status = status;
     }
 
     public int  Id { get; private set; }
