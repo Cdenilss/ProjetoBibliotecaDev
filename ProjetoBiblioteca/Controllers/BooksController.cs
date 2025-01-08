@@ -23,9 +23,7 @@ public class BooksController : ControllerBase
     public IActionResult Get(string search)
     {
         var books = _context.Books
-            .Include(b=>b.Titulo)
-            .Include(b=>b.Status)
-            .Where(b => b.IsDeleted).ToList();
+            .Where(b => !b.IsDeleted).ToList();
         var model= books.Select(BookViewModel.FromEntity).ToList();
         return Ok(model);
     }
@@ -35,9 +33,7 @@ public class BooksController : ControllerBase
     public IActionResult GetById(int id)
     {
         var books = _context.Books
-            .Include(b => b.Titulo)
-            .Include(b => b.Status)
-            .Include(b => b.Autor)
+            .Include(b=>b.Loans)
             .SingleOrDefault(b => b.Id == id);
 
         var model = BookViewModel.FromEntity(books);
@@ -55,7 +51,7 @@ public class BooksController : ControllerBase
     [HttpPost]
     public IActionResult Post(CreateBooksInputModel model)
     {
-        var book = model.ToEntity();
+        var book =  model.ToEntity();
         _context.Books.Add(book);
         _context.SaveChanges();
         return CreatedAtAction(nameof(GetById), new { id = 1 }, model);
@@ -71,5 +67,6 @@ public class BooksController : ControllerBase
     {
         return NoContent();
     }
+    
 }
 }

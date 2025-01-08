@@ -5,13 +5,26 @@ namespace ProjetoBiblioteca.Models;
 
 public class CreateBooksInputModel
 {
-    public int  Id { get; set; }
-    public string Titulo { get; set; }
-    public string Autor { get; set; }
-    public string ISBN { get; set; }
-    public DateTime AnoDePublicacao { get; set; }
+    public CreateBooksInputModel(int id, string title, string author, string isbn, DateTime yearOfPublication, int totalLoans)
+    {
+        Id = id;
+        Title = title;
+        Author = author;
+        ISBN = isbn;
+        YearOfPublication = yearOfPublication;
+        TotalLoans = totalLoans;
+    }
+
+    public int  Id { get; private set; }
+    public string Title { get; private set; }
+    public string Author { get; private set; }
+    public string ISBN { get; private set; }
+    
+    public DateTime YearOfPublication { get;  private set; }
+    public int TotalLoans { get; private set; }
 
     public Book ToEntity()
-        => new(Id, Titulo, Autor, ISBN, AnoDePublicacao.Year, BookStatusEnum.Disponivel);
+        => new(Id, Title , Author,ISBN, YearOfPublication.Year, BookStatusEnum.Available);
+    
 
 }

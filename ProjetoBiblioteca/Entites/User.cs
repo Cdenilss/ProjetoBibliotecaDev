@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore.Update.Internal;
 
 namespace ProjetoBiblioteca.Entites;
@@ -26,14 +27,21 @@ public class User: BaseEntity
     public Book Book { get; private set; }
     protected User() { }
    
-    public User(string fullName, string email)
+    public User(string name, string email, int id)
         : base()
     {
         // Guarda os valores
-        Name = fullName;
+        Name = name;
         Email = email;
+        Id = id;
         Active = true;
         LoansList= [];
+    }
+
+    public void Update(string name, string email)
+    {
+        Name = name;
+        Email = email;
     }
     
 }

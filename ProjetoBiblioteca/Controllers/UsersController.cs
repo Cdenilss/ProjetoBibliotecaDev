@@ -1,5 +1,10 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ProjetoBiblioteca.Models;
+using ProjetoBiblioteca.Models.ViewModel;
+using ProjetoBiblioteca.Persistence;
 
 namespace ProjetoBiblioteca.Controllers
 {
@@ -8,17 +13,35 @@ namespace ProjetoBiblioteca.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        // GET
+        private readonly LibaryDbContext _context;
+
+        public UsersController(LibaryDbContext context)
+        {
+            _context = context;
+        }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id) 
+        public IActionResult GetById(int id)
         {
-            return Ok();
+            var user = _context.Users
+                .Include(u => u.LoansList)
+                .SingleOrDefault(u => u.Id == id);
+            if (user == null)
+            {
+                return NotFound(); 
+            }
+
+            var model = UserViewModel.FromEntity(user);
+            
+            return Ok(model);
         }        
         
         [HttpPost]
         public IActionResult PostUser(CreateUserInputModel model)
         {
+            var user = model.ToEntity();
+            _context.Add(user);
+            _context.SaveChanges();
             return CreatedAtAction(nameof(GetById), new { id = 1 }, model);
             
         }
@@ -26,6 +49,16 @@ namespace ProjetoBiblioteca.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, UpdateUserInputModel model)
         {
+            var user = _context.Users.SingleOrDefault(u => u.Id == id);
+
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            user.Update(model.Nome, model.Email);
+            _context.Users.Update(user);
+            _context.SaveChanges();
             
             return Ok();
         }
@@ -35,5 +68,23 @@ namespace ProjetoBiblioteca.Controllers
             var description = $"File : {file.FileName}, Tamanho: {file.Length}";
             return Ok(description);
         }
+        [HttpDelete("{id}")]
+        public IActionResult Delate(int id)
+        {
+            var user = _context.Users.SingleOrDefault(u => u.Id == id);
+
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            user.SetAsDeleted();
+            _context.Users.Update(user);
+            _context.SaveChanges();
+            
+            return NoContent();
+        }
     }
+    
+   
 }
