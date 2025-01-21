@@ -13,7 +13,7 @@ public class Book: BaseEntity
         Author = author;
         ISBN = isbn;
         YearOfPublication = yearOfPublication;
-        Status = status;
+        Status =BookStatusEnum.Available;
     }
 
     public int  Id { get; private set; }
@@ -30,10 +30,42 @@ public class Book: BaseEntity
     
     public List<Loan> Loans { get; private set; }
 
-    public bool Disponivel()
-        => Status == BookStatusEnum.Available;
+    public void Loaned()
+    {
+        if (Status == BookStatusEnum.Available&& Status!=BookStatusEnum.Reserved)
+        {
+            Status = BookStatusEnum.Loaned;
 
+        }
+    }
+    public void MakesAvailable()
+    {
+        if (Status == BookStatusEnum.Loaned || Status==BookStatusEnum.Reserved)
+        {
+            Status = BookStatusEnum.Available;
 
+        }
+    }
+    public void Reserved()
+    {
+        if (Status == BookStatusEnum.Available)
+        {
+            Status = BookStatusEnum.Reserved;
+
+        }
+    }
+    public void MarkAsUnavailable()
+    {
+        if (Status != BookStatusEnum.Loaned)
+        {
+            Status = BookStatusEnum.Unavailable;
+
+        }
+    }
+    
+    
+        
+    
 
 
 

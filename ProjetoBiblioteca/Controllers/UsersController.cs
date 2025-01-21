@@ -21,11 +21,13 @@ namespace ProjetoBiblioteca.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public IActionResult FindUserById(int id)
         {
             var user = _context.Users
                 .Include(u => u.LoansList)
+                .ThenInclude(l => l.Book) 
                 .SingleOrDefault(u => u.Id == id);
+
             if (user == null)
             {
                 return NotFound(); 
@@ -42,7 +44,7 @@ namespace ProjetoBiblioteca.Controllers
             var user = model.ToEntity();
             _context.Add(user);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(GetById), new { id = 1 }, model);
+            return CreatedAtAction(nameof(FindUserById), new { id = user.Id }, model);
             
         }
         

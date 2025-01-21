@@ -5,13 +5,13 @@ namespace ProjetoBiblioteca.Models.ViewModel;
 
 public class BookViewModel
 {
-    public BookViewModel(int id, string title, string author, int yearOfPublication, List<Loan> loans)
+    public BookViewModel(int id, string title, string author, int yearOfPublication,int totalLoans)
     {
         Id = id;
         Title = title;
         Author = author;
         YearOfPublication = yearOfPublication;
-        TotalLoans = loans?.Count()??0;
+        TotalLoans = totalLoans;
     }
 
     public int  Id { get; private set; }
@@ -21,5 +21,8 @@ public class BookViewModel
     public int TotalLoans { get; private set; }
 
     public static BookViewModel FromEntity(Book book)
-        => new(book.Id, book.Title, book.Author, book.YearOfPublication,new List<Loan>());
+    {
+        var loansActive = book.Loans?.Count(loan => !loan.IsDeleted)?? 0;
+        return new(book.Id, book.Title, book.Author, book.YearOfPublication, loansActive );
+    }
 }

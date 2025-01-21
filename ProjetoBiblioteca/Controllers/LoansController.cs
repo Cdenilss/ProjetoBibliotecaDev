@@ -1,5 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ProjetoBiblioteca.Enums;
 using ProjetoBiblioteca.Models;
+using ProjetoBiblioteca.Models.ViewModel;
+using ProjetoBiblioteca.Persistence;
 
 namespace ProjetoBiblioteca.Controllers
 {
@@ -7,22 +11,54 @@ namespace ProjetoBiblioteca.Controllers
     [ApiController]
     public class LoansController : ControllerBase
     {
+        private readonly LibaryDbContext _context;
+
+        public LoansController(LibaryDbContext context)
+        {
+            _context = context;
+        }
+       
+        [HttpGet("{id}")]
+        public IActionResult GetLoanById(int id )
+        {
+            var loans = _context.Loans
+                .Include(l => l.User)
+                .Include(l=>l.Book)
+                .FirstOrDefault(l => l.Id == id);
+            if (loans == null)
+            {
+                return NotFound(); 
+            }
+
+            var model = LoanViewModel.FromEntity(loans);
+            
+            
+            return Ok(model);
+        }        
         [HttpPost]
-        // Post api/Loans
+        
         public IActionResult PostLoan(CreateLoanInputModel model)
         {
-            return Created();
-        }
-        
-        //GET api/Loand/1234
 
-        [HttpGet("{id}")]
-        public IActionResult GetLoanById(int id)
-        {
-            return Ok();
+            var book = _context.Books.FirstOrDefault(b => b.Id == model.IdBook);
+            if (book==null)
+            {
+                return NotFound("Livro Nao encontrado ");
+            }
+
+            if (book.Status != BookStatusEnum.Available)
+            {
+                return BadRequest("Livro Não Disponivel");
+            }
+        
+            var loan = model.ToEntity();
+
+            _context.Add(loan);
+            _context.SaveChanges();
+            
+            return CreatedAtAction(nameof(GetLoanById), new { id = loan.Id }, loan);
         }
         
         
-        // criar um upadat nos loans
     }
 }

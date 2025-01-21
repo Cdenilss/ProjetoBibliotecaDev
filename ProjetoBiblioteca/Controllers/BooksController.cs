@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProjetoBiblioteca.Enums;
 using ProjetoBiblioteca.Models;
 using ProjetoBiblioteca.Models.ViewModel;
 using ProjetoBiblioteca.Persistence;
@@ -18,23 +19,19 @@ public class BooksController : ControllerBase
     {
         _context = context;
     }
-
-    [HttpGet ("search")]
-    public IActionResult Get(string search)
-    {
-        var books = _context.Books
-            .Where(b => !b.IsDeleted).ToList();
-        var model= books.Select(BookViewModel.FromEntity).ToList();
-        return Ok(model);
-    }
     
     [HttpGet("{id}")]
 
-    public IActionResult GetById(int id)
+    public IActionResult FindBookById(int id)
     {
         var books = _context.Books
             .Include(b=>b.Loans)
             .SingleOrDefault(b => b.Id == id);
+
+        if (books==null)
+        {
+            return NotFound();
+        }
 
         var model = BookViewModel.FromEntity(books);
         return Ok(model);
@@ -44,7 +41,17 @@ public class BooksController : ControllerBase
     [HttpGet]
     public IActionResult GetAll()
     {
-        return Ok();
+
+        var books = _context.Books
+            .Where(b => !b.IsDeleted).ToList();
+
+        if (books == null)
+        {
+            return NotFound();
+        }
+        var model = books.Select(b=>BookItemViewModel.FromEntity(b)).ToList();
+        
+        return Ok(model);
     }
     
      
@@ -54,18 +61,84 @@ public class BooksController : ControllerBase
         var book =  model.ToEntity();
         _context.Books.Add(book);
         _context.SaveChanges();
-        return CreatedAtAction(nameof(GetById), new { id = 1 }, model);
+        return CreatedAtAction(nameof(FindBookById), new { id = book.Id }, model);
     }
 
-    [HttpPut("{id}")]
-    public IActionResult PutBook()
+    [HttpPut("{id}/Loaned")]
+    public IActionResult Loaned(int id)
     {
-         return NoContent();
+        var book = _context.Books.SingleOrDefault(b => b.Id == id);
+
+        if (book.Status != BookStatusEnum.Available)
+        {
+            return BadRequest();
+        }
+
+        book.Loaned();
+        _context.Update(book);
+        _context.SaveChanges();
+        return Created();
+    }
+   
+    [HttpPut("{id}/MakesAvailable")]
+    public IActionResult MakesAvailable(int id)
+    {
+        var book = _context.Books.SingleOrDefault(b => b.Id == id);
+
+        if (book == null)
+        {
+            return NotFound();
+        }
+        book.MakesAvailable();
+        _context.Update(book);
+        _context.SaveChanges();
+        return Created();
+        
+        
+    }
+    [HttpPut("{id}/Reserved")]
+    public IActionResult Reserved(int id)
+    {
+        var book = _context.Books.SingleOrDefault(b => b.Id == id);
+
+        if (book.Status != BookStatusEnum.Available)
+        {
+            return BadRequest();
+        }
+        book.Reserved();
+        _context.Update(book);
+        _context.SaveChanges();
+        return Created();
+
+    }
+    [HttpPut("{id}/MakesUnvailable")]
+    public IActionResult MakesUnvailable(int id)
+    {
+        var book = _context.Books.SingleOrDefault(b => b.Id == id);
+
+        if (book== null)
+        {
+            return NotFound();
+        }
+        book.MarkAsUnavailable();
+        _context.Update(book);
+        _context.SaveChanges();
+        return Created();
+
     }
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
+        var book = _context.Books.SingleOrDefault(b => b.Id == id);
+        if (book is null)
+        {
+            return NotFound();
+        }
+        book.SetAsDeleted();
+        _context.Update(book);
+        _context.SaveChanges();
         return NoContent();
+
     }
     
 }

@@ -25,10 +25,12 @@ public class LibaryDbContext : DbContext
         builder.Entity<User>(e =>
         {
             e.HasKey(u => u.Id);
+
             e.HasMany(u => u.LoansList)
                 .WithOne(l => l.User)
                 .HasForeignKey(l => l.IdUser)
                 .OnDelete(DeleteBehavior.Restrict);
+            
         });
         builder.Entity<Loan >(e =>
         {
@@ -36,6 +38,11 @@ public class LibaryDbContext : DbContext
             e.HasOne(l => l.Book)
                 .WithMany(b=>b.Loans)
                 .HasForeignKey(l => l.IdBook)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            e.HasOne(l => l.User)
+                .WithMany(u => u.LoansList)
+                .HasForeignKey(l => l.IdUser)
                 .OnDelete(DeleteBehavior.Restrict);
         });
         
