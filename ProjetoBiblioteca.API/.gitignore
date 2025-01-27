@@ -18,3 +18,6 @@ node_modules/
 
 *.config
 appsettings*.json
+.idea/
+.DS_Store
+.vs/
