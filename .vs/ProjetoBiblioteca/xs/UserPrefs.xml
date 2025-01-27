@@ -1,0 +1,20 @@
+﻿<Properties StartupConfiguration="{6C95B4C2-C7C9-45C3-85B7-3C05C5D37375}|https">
+  <MonoDevelop.Ide.ItemProperties.ProjetoBiblioteca.API PreferredExecutionTarget="/Applications/Opera GX.app" />
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ProjetoBiblioteca" expanded="True">
+            <Node name="ProjetoBiblioteca.API" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

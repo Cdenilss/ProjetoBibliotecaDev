@@ -1,0 +1,13 @@
+/Users/carlosdenil/RiderProjects/ProjetoBiblioteca.Api/ProjetoBiblioteca.Core/bin/Debug/net8.0/ProjetoBiblioteca.Core.deps.json
+/Users/carlosdenil/RiderProjects/ProjetoBiblioteca.Api/ProjetoBiblioteca.Core/bin/Debug/net8.0/ProjetoBiblioteca.Core.dll
+/Users/carlosdenil/RiderProjects/ProjetoBiblioteca.Api/ProjetoBiblioteca.Core/bin/Debug/net8.0/ProjetoBiblioteca.Core.pdb
+/Users/carlosdenil/RiderProjects/ProjetoBiblioteca.Api/ProjetoBiblioteca.Core/obj/Debug/net8.0/ProjetoBiblioteca.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/carlosdenil/RiderProjects/ProjetoBiblioteca.Api/ProjetoBiblioteca.Core/obj/Debug/net8.0/ProjetoBiblioteca.Core.AssemblyInfoInputs.cache
+/Users/carlosdenil/RiderProjects/ProjetoBiblioteca.Api/ProjetoBiblioteca.Core/obj/Debug/net8.0/ProjetoBiblioteca.Core.AssemblyInfo.cs
+/Users/carlosdenil/RiderProjects/ProjetoBiblioteca.Api/ProjetoBiblioteca.Core/obj/Debug/net8.0/ProjetoBiblioteca.Core.csproj.CoreCompileInputs.cache
+/Users/carlosdenil/RiderProjects/ProjetoBiblioteca.Api/ProjetoBiblioteca.Core/obj/Debug/net8.0/ProjetoBiblioteca.Core.sourcelink.json
+/Users/carlosdenil/RiderProjects/ProjetoBiblioteca.Api/ProjetoBiblioteca.Core/obj/Debug/net8.0/ProjetoBiblioteca.Core.dll
+/Users/carlosdenil/RiderProjects/ProjetoBiblioteca.Api/ProjetoBiblioteca.Core/obj/Debug/net8.0/refint/ProjetoBiblioteca.Core.dll
+/Users/carlosdenil/RiderProjects/ProjetoBiblioteca.Api/ProjetoBiblioteca.Core/obj/Debug/net8.0/ProjetoBiblioteca.Core.pdb
+/Users/carlosdenil/RiderProjects/ProjetoBiblioteca.Api/ProjetoBiblioteca.Core/obj/Debug/net8.0/ref/ProjetoBiblioteca.Core.dll
+/Users/carlosdenil/RiderProjects/ProjetoBiblioteca.Api/ProjetoBiblioteca.Core/obj/Debug/net8.0/ProjetoBiblioteca.Core.csproj.AssemblyReference.cache

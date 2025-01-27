@@ -1,0 +1,138 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Infrastructure/ProjetoBiblioteca.Infrastructure.csproj": {}
+  },
+  "projects": {
+    "/Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/ProjetoBiblioteca.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/ProjetoBiblioteca.Core.csproj",
+        "projectName": "ProjetoBiblioteca.Core",
+        "projectPath": "/Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/ProjetoBiblioteca.Core.csproj",
+        "packagesPath": "/Users/carlosdenil/.nuget/packages/",
+        "outputPath": "/Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/carlosdenil/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.204/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Infrastructure/ProjetoBiblioteca.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Infrastructure/ProjetoBiblioteca.Infrastructure.csproj",
+        "projectName": "ProjetoBiblioteca.Infrastructure",
+        "projectPath": "/Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Infrastructure/ProjetoBiblioteca.Infrastructure.csproj",
+        "packagesPath": "/Users/carlosdenil/.nuget/packages/",
+        "outputPath": "/Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/carlosdenil/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/ProjetoBiblioteca.Core.csproj": {
+                "projectPath": "/Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/ProjetoBiblioteca.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.204/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
