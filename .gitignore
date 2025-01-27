@@ -5,6 +5,9 @@ obj/
 
 .vscode/
 .idea/
+.vs/
+
+
 *.suo
 *.user
 *.userosscache
@@ -14,10 +17,11 @@ obj/
 packages/
 node_modules/
 
+
 *.log
+
 
 *.config
 appsettings*.json
-.idea/
+
 .DS_Store
-.vs/
