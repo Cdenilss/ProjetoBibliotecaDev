@@ -1,12 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ProjetoBiblioteca.Application.Models.InputModels;
-using ProjetoBiblioteca.Core.Enums;
 using ProjetoBiblioteca.Infrastructure.Persistence;
-using ProjetoBiblioteca.Application.Models.ViewModel;
+using ProjetoBiblioteca.Application.Services;
 
 
-namespace ProjetoBiblioteca.Controllers{
+namespace ProjetoBiblioteca.Controllers;
     [Route("api/Books")]
     [ApiController]
 
@@ -15,27 +13,25 @@ public class BooksController : ControllerBase
 {
 
     private readonly LibaryDbContext _context;
+    private readonly IBookServices _services;
 
-    public BooksController(LibaryDbContext context)
+
+    public BooksController(LibaryDbContext context, IBookServices services)
     {
         _context = context;
+        _services = services;
     }
     
     [HttpGet("{id}")]
 
     public IActionResult FindBookById(int id)
     {
-        var books = _context.Books
-            .Include(b=>b.Loans)
-            .SingleOrDefault(b => b.Id == id);
-
-        if (books==null)
+        var result = _services.FindById(id);
+        if (!result.IsSucess)
         {
-            return NotFound();
+            BadRequest(result.Message);
         }
-
-        var model = BookViewModel.FromEntity(books);
-        return Ok(model);
+        return Ok(result);
         
     }
     
@@ -43,104 +39,77 @@ public class BooksController : ControllerBase
     public IActionResult GetAll()
     {
 
-        var books = _context.Books
-            .Where(b => !b.IsDeleted).ToList();
-
-        if (books == null)
-        {
-            return NotFound();
-        }
-        var model = books.Select(b=>BookItemViewModel.FromEntity(b)).ToList();
+        var result = _services.GetAll();
+        return Ok(result);
         
-        return Ok(model);
     }
     
      
     [HttpPost]
     public IActionResult Post(CreateBooksInputModel model)
     {
-        var book =  model.ToEntity();
-        _context.Books.Add(book);
-        _context.SaveChanges();
-        return CreatedAtAction(nameof(FindBookById), new { id = book.Id }, model);
+        var result = _services.Insert(model);
+        return CreatedAtAction(nameof(FindBookById), new { id = result.Data }, model);
     }
 
     [HttpPut("{id}/Loaned")]
     public IActionResult Loaned(int id)
     {
-        var book = _context.Books.SingleOrDefault(b => b.Id == id);
-
-        if (book != null && book.Status != BookStatusEnum.Available)
+        var result = _services.Loaned(id);
+        if (!result.IsSucess)
         {
-            return BadRequest();
+            return BadRequest(result.Message);
         }
 
-        book.Loaned();
-        _context.Update(book);
-        _context.SaveChanges();
-        return Created();
+        return NoContent();
     }
    
     [HttpPut("{id}/MakesAvailable")]
     public IActionResult MakesAvailable(int id)
     {
-        var book = _context.Books.SingleOrDefault(b => b.Id == id);
-
-        if (book == null)
+        var result = _services.MakesAvailable(id);
+        if (!result.IsSucess)
         {
-            return NotFound();
+            return BadRequest(result.Message);
         }
-        book.MakesAvailable();
-        _context.Update(book);
-        _context.SaveChanges();
-        return Created();
+
+        return NoContent();
         
         
     }
     [HttpPut("{id}/Reserved")]
     public IActionResult Reserved(int id)
     {
-        var book = _context.Books.SingleOrDefault(b => b.Id == id);
-
-        if (book != null && book.Status != BookStatusEnum.Available)
+        var result = _services.Reserved(id);
+        if (!result.IsSucess)
         {
-            return BadRequest();
+            return BadRequest(result.Message);
         }
-        book.Reserved();
-        _context.Update(book);
-        _context.SaveChanges();
-        return Created();
 
+        return NoContent();
     }
     [HttpPut("{id}/MakesUnvailable")]
     public IActionResult MakesUnvailable(int id)
     {
-        var book = _context.Books.SingleOrDefault(b => b.Id == id);
-
-        if (book== null)
+        var result = _services.MakesUnvailable(id);
+        if (!result.IsSucess)
         {
-            return NotFound();
+            return BadRequest(result.Message);
         }
-        book.MarkAsUnavailable();
-        _context.Update(book);
-        _context.SaveChanges();
-        return Created();
 
+        return NoContent();
     }
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        var book = _context.Books.SingleOrDefault(b => b.Id == id);
-        if (book is null)
+        var result = _services.Delete(id);
+        if (!result.IsSucess)
         {
-            return NotFound();
+            return BadRequest(result.Message);
         }
-        book.SetAsDeleted();
-        _context.Update(book);
-        _context.SaveChanges();
+
         return NoContent();
 
     }
     
-}
 }

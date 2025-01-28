@@ -10,6 +10,7 @@
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
     <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.1">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -20,13 +21,13 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Service\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\ProjetoBiblioteca.Application\ProjetoBiblioteca.Application.csproj" />
       <ProjectReference Include="..\ProjetoBiblioteca.Core\ProjetoBiblioteca.Core.csproj" />
       <ProjectReference Include="..\ProjetoBiblioteca.Infrastructure\ProjetoBiblioteca.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Service\" />
     </ItemGroup>
 
 </Project>
