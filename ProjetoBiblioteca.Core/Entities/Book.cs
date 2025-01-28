@@ -2,73 +2,75 @@ using ProjetoBiblioteca.Core.Enums;
 
 
 
-namespace ProjetoBiblioteca.Core.Entities;
-
-public class Book: BaseEntity
+namespace ProjetoBiblioteca.Core.Entities
 {
-    protected Book(){}
-    public Book(int id, string title, string author, string isbn, int yearOfPublication, BookStatusEnum status)
-    :base()
-    {
-        Id = id;
-        Title = title;
-        Author = author;
-        ISBN = isbn;
-        YearOfPublication = yearOfPublication;
-        Status =BookStatusEnum.Available;
-    }
 
-    public int  Id { get; private set; }
-    
-    public string Title { get; private set; }
-    
-    public string Author { get; private set; }
-    
-    public string ISBN { get; private set; }
-   
-    public int YearOfPublication { get; private set; }
-    
-    public BookStatusEnum Status { get; private set; }
-    
-    public List<Loan> Loans { get; private set; }
-
-    public void Loaned()
+    public class Book : BaseEntity
     {
-        if (Status == BookStatusEnum.Available&& Status!=BookStatusEnum.Reserved)
+        protected Book()
         {
-            Status = BookStatusEnum.Loaned;
-
         }
-    }
-    public void MakesAvailable()
-    {
-        if (Status == BookStatusEnum.Loaned || Status==BookStatusEnum.Reserved)
+
+        public Book(int id, string title, string author, string isbn, int yearOfPublication, BookStatusEnum status)
+            : base()
         {
+            Id = id;
+            Title = title;
+            Author = author;
+            ISBN = isbn;
+            YearOfPublication = yearOfPublication;
             Status = BookStatusEnum.Available;
-
         }
-    }
-    public void Reserved()
-    {
-        if (Status == BookStatusEnum.Available)
+
+        public int Id { get; private set; }
+
+        public string Title { get; private set; }
+
+        public string Author { get; private set; }
+
+        public string ISBN { get; private set; }
+
+        public int YearOfPublication { get; private set; }
+
+        public BookStatusEnum Status { get; private set; }
+
+        public List<Loan> Loans { get; private set; }
+
+        public void Loaned()
         {
-            Status = BookStatusEnum.Reserved;
+            if (Status == BookStatusEnum.Available && Status != BookStatusEnum.Reserved)
+            {
+                Status = BookStatusEnum.Loaned;
 
+            }
         }
-    }
-    public void MarkAsUnavailable()
-    {
-        if (Status != BookStatusEnum.Loaned)
+
+        public void MakesAvailable()
         {
-            Status = BookStatusEnum.Unavailable;
+            if (Status == BookStatusEnum.Loaned || Status == BookStatusEnum.Reserved)
+            {
+                Status = BookStatusEnum.Available;
 
+            }
         }
+
+        public void Reserved()
+        {
+            if (Status == BookStatusEnum.Available)
+            {
+                Status = BookStatusEnum.Reserved;
+
+            }
+        }
+
+        public void MarkAsUnavailable()
+        {
+            if (Status != BookStatusEnum.Loaned)
+            {
+                Status = BookStatusEnum.Unavailable;
+
+            }
+        }
+
     }
-    
-    
-        
-    
-
-
-
 }
