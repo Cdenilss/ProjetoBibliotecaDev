@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ProjetoBiblioteca.Application.Models.InputModels;
 using ProjetoBiblioteca.Application.Models.ViewModel;
+using ProjetoBiblioteca.Application.Services;
 using ProjetoBiblioteca.Infrastructure.Persistence;
 
 
@@ -15,77 +16,65 @@ namespace ProjetoBiblioteca.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly LibaryDbContext _context;
+        private readonly LibraryDbContext _context;
+        private readonly IUserService _services;
 
-        public UsersController(LibaryDbContext context)
+        public UsersController(LibraryDbContext context, IUserService services)
         {
             _context = context;
+            _services = services;
         }
 
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var result = _services.GetAll();
+            
+            return Ok(result);
+        }
         [HttpGet("{id}")]
         public IActionResult FindUserById(int id)
         {
-            var user = _context.Users
-                .Include(u => u.LoansList)
-                .ThenInclude(l => l.Book) 
-                .SingleOrDefault(u => u.Id == id);
-
-            if (user == null)
+            var result = _services.FindUserById(id);
+            if (!result.IsSucess)
             {
-                return NotFound(); 
+                return BadRequest(result.Message);
             }
-
-            var model = UserViewModel.FromEntity(user);
+            return Ok(result);
             
-            return Ok(model);
         }        
+        
         
         [HttpPost]
         public IActionResult PostUser(CreateUserInputModel model)
         {
-            var user = model.ToEntity();
-            _context.Add(user);
-            _context.SaveChanges();
-            return CreatedAtAction(nameof(FindUserById), new { id = user.Id }, model);
+            var result = _services.Insert(model);
+            return CreatedAtAction(nameof(FindUserById), new { id = result.Data}, model);
             
         }
         
         [HttpPut("{id}")]
         public IActionResult Put(int id, UpdateUserInputModel model)
         {
-            var user = _context.Users.SingleOrDefault(u => u.Id == id);
-
-            if (user is null)
+            var result = _services.Put(id,model);
+            if (!result.IsSucess)
             {
-                return NotFound();
+                return BadRequest(result.Message);
             }
 
-            user.Update(model.Nome, model.Email);
-            _context.Users.Update(user);
-            _context.SaveChanges();
+            return NoContent();
             
-            return Ok();
         }
-        [HttpPut("{id}/profile-picture")]
-        public IActionResult PutProfilePicture(IFormFile file)
-        {
-            var description = $"File : {file.FileName}, Tamanho: {file.Length}";
-            return Ok(description);
-        }
+        
         [HttpDelete("{id}")]
-        public IActionResult Delate(int id)
+        public IActionResult Delete(int id)
         {
-            var user = _context.Users.SingleOrDefault(u => u.Id == id);
-
-            if (user is null)
+            var result = _services.Delete(id);
+            if (!result.IsSucess)
             {
-                return NotFound();
+                return BadRequest(result.Message);
             }
-
-            user.SetAsDeleted();
-            _context.Users.Update(user);
-            _context.SaveChanges();
-            
             return NoContent();
         }
     }

@@ -13,7 +13,7 @@ public class ApiExceptionHandler :IExceptionHandler
             Title = "Server erro"
          
         };
-        // fazer o que preferir no momento
+       
 
         httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
         await httpContext.Response.WriteAsJsonAsync(details, cancellationToken);

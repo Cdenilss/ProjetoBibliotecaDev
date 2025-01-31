@@ -8,9 +8,9 @@ namespace ProjetoBiblioteca.Application.Services
 {
     public class BookServices : IBookServices
     {
-        private readonly LibaryDbContext _context;
+        private readonly LibraryDbContext _context;
 
-        public BookServices(LibaryDbContext context)
+        public BookServices(LibraryDbContext context)
         {
             _context = context;
         }

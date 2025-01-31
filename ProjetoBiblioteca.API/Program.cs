@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddExceptionHandler<ApiExceptionHandler>();
 builder.Services.AddProblemDetails();
 builder.Services
-    .AddAppplication();
+    .AddApplication();
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
@@ -24,7 +24,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 //builder.Services.AddDbContext<LibaryDbContext>(o => o.UseInMemoryDatabase("LibaryDb"));
 var connectionString = builder.Configuration.GetConnectionString("BibliotecaDevCs");
-builder.Services.AddDbContext<LibaryDbContext>(o => o.UseSqlServer(connectionString));
+builder.Services.AddDbContext<LibraryDbContext>(o => o.UseSqlServer(connectionString));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

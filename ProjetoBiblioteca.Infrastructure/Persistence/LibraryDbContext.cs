@@ -6,9 +6,9 @@ using ProjetoBiblioteca.Core.Entities;
 
 namespace ProjetoBiblioteca.Infrastructure.Persistence;
 
-public class LibaryDbContext : DbContext
+public class LibraryDbContext : DbContext
 {
-    public LibaryDbContext(DbContextOptions<LibaryDbContext> options) : base(options)
+    public LibraryDbContext(DbContextOptions<LibraryDbContext> options) : base(options)
     {
         
     }

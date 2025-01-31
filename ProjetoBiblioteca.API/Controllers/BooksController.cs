@@ -12,11 +12,11 @@ namespace ProjetoBiblioteca.Controllers;
 public class BooksController : ControllerBase
 {
 
-    private readonly LibaryDbContext _context;
+    private readonly LibraryDbContext _context;
     private readonly IBookServices _services;
 
 
-    public BooksController(LibaryDbContext context, IBookServices services)
+    public BooksController(LibraryDbContext context, IBookServices services)
     {
         _context = context;
         _services = services;
@@ -29,7 +29,7 @@ public class BooksController : ControllerBase
         var result = _services.FindById(id);
         if (!result.IsSucess)
         {
-            BadRequest(result.Message);
+          return BadRequest(result.Message);
         }
         return Ok(result);
         
