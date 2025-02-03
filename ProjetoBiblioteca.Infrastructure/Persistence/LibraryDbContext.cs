@@ -41,11 +41,7 @@ public class LibraryDbContext : DbContext
                 .WithMany(b=>b.Loans)
                 .HasForeignKey(l => l.IdBook)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            e.HasOne(l => l.User)
-                .WithMany(u => u.LoansList)
-                .HasForeignKey(l => l.IdUser)
-                .OnDelete(DeleteBehavior.Restrict);
+            
         });
         
 
