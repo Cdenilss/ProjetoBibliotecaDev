@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using ProjetoBiblioteca.Application.Models.InputModels;
 using ProjetoBiblioteca.Application.Models.ViewModel;
+using ProjetoBiblioteca.Core.Entities;
+using ProjetoBiblioteca.Core.Enums;
 using ProjetoBiblioteca.Infrastructure.Persistence;
 
 namespace ProjetoBiblioteca.Application.Services;
@@ -32,6 +34,13 @@ public class LoanServices : ILoanService
 
     public ResultViewModel<int> Insert(CreateLoanInputModel model)
     {
+        var book = _context.Books.Find(model.IdBook);
+        if (book == null)
+        {
+            return ResultViewModel<int>.Error("Book not found.");
+        }
+        book.Loaned();
+
         var loan = model.ToEntity();
         _context.Add(loan);
         _context.SaveChanges();

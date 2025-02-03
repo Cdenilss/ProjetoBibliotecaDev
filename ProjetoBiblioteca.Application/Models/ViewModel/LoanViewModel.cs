@@ -1,4 +1,6 @@
 using ProjetoBiblioteca.Core.Entities;
+using ProjetoBiblioteca.Infrastructure.Serialization;
+using System.Text.Json.Serialization;
 
 
 namespace ProjetoBiblioteca.Application.Models.ViewModel;
@@ -22,7 +24,10 @@ public class LoanViewModel
     public string UserName { get; private set; }
     public int IdBook { get; private set; }
     public string BookTitle { get; private set; }
+    [JsonConverter(typeof(DateFormatJsonConverter))]
     public DateTime LoanDate { get; private set; }
+
+    [JsonConverter(typeof(DateFormatJsonConverter))]
     public DateTime ReturnDate { get; private set; }
 
     public static LoanViewModel FromEntity(Loan loan)

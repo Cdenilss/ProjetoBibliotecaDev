@@ -1,20 +1,22 @@
 
 using ProjetoBiblioteca.Core.Entities;
+using ProjetoBiblioteca.Core.Enums;
 
 
 namespace ProjetoBiblioteca.Core.Entities;
 
-public class Loan: BaseEntity
+public class Loan : BaseEntity
 {
-    public Loan( int idUser, int idBook, DateTime loanDate, DateTime returnDate) 
+    public Loan(int idUser, int idBook, DateTime loanDate, DateTime returnDate)
         : base()
-    
+
     {
-        
+
         IdUser = idUser;
         IdBook = idBook;
         LoanDate = loanDate;
         ReturnDate = returnDate;
+
     }
 
     public int Id { get; private set; }
@@ -24,5 +26,4 @@ public class Loan: BaseEntity
     public Book Book { get; private set; }
     public DateTime LoanDate { get; private set; }
     public DateTime ReturnDate { get; private set; }
-    
 }
