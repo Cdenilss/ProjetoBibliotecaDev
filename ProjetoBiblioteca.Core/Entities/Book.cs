@@ -11,10 +11,10 @@ namespace ProjetoBiblioteca.Core.Entities
         {
         }
 
-        public Book(int id, string title, string author, string isbn, int yearOfPublication, BookStatusEnum status)
+        public Book(string title, string author, string isbn, int yearOfPublication, BookStatusEnum status)
             : base()
         {
-            Id = id;
+            
             Title = title;
             Author = author;
             ISBN = isbn;
@@ -22,7 +22,7 @@ namespace ProjetoBiblioteca.Core.Entities
             Status = BookStatusEnum.Available;
         }
 
-        public int Id { get; private set; }
+       
 
         public string Title { get; private set; }
 

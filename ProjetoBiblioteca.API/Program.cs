@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ProjetoBiblioteca.Application.Services;
 using ProjetoBiblioteca.ExceptionHandler;
 using ProjetoBiblioteca.Infrastructure.Persistence;
+using ProjetoBiblioteca.Infrastructure.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,8 @@ builder.Services
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.Converters.Add(new DateFormatJsonConverter());
+
 });
 
 //builder.Services.AddDbContext<LibaryDbContext>(o => o.UseInMemoryDatabase("LibaryDb"));

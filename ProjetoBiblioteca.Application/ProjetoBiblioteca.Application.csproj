@@ -12,11 +12,22 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.4.1" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.1">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Commands\BookCommand\DeleteBook\" />
+      <Folder Include="Commands\BookCommand\InsertBook\" />
+      <Folder Include="Commands\BookCommand\LoanBookCommand\" />
+      <Folder Include="Commands\BookCommand\MakeBookAvailableCommand\" />
+      <Folder Include="Commands\BookCommand\MakeBookUnavailableCommand\" />
+      <Folder Include="Commands\BookCommand\ReserveBookCommand\" />
+      <Folder Include="Queries\" />
     </ItemGroup>
 
 </Project>
