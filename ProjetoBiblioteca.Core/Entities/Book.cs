@@ -63,13 +63,14 @@ namespace ProjetoBiblioteca.Core.Entities
             }
         }
 
-        public void MarkAsUnavailable()
+        public void MakesUnavailable()
         {
             if (Status != BookStatusEnum.Loaned)
             {
                 Status = BookStatusEnum.Unavailable;
 
             }
+            
         }
 
     }

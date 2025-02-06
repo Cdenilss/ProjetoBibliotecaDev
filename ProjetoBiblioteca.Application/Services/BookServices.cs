@@ -109,7 +109,7 @@ namespace ProjetoBiblioteca.Application.Services
                 return ResultViewModel.Error("Livro Não encontrado");
             }
 
-            book.MarkAsUnavailable();
+            book.MakesUnavailable();
             _context.Update(book);
             _context.SaveChanges();
             return ResultViewModel.Sucess();

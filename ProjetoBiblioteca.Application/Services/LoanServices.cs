@@ -16,7 +16,7 @@ public class LoanServices : ILoanService
         _context = context;
     }
 
-    public ResultViewModel<List<LoanViewModel>> Getall()
+    public ResultViewModel<List<LoanViewModel>> GetAll()
     {
         var loan = _context.Loans
             .Where(b => !b.IsDeleted).ToList();
@@ -26,7 +26,7 @@ public class LoanServices : ILoanService
             return ResultViewModel<List<LoanViewModel>>.Error("Lista de Livros Vazia");
         }
 
-        var model = loan.Select(b => LoanViewModel.FromEntity(b)).ToList();
+        var model = loan.Select(l => LoanViewModel.FromEntity(l)).ToList();
 
         return ResultViewModel<List<LoanViewModel>>.Sucess(model);
     }
@@ -55,25 +55,38 @@ public class LoanServices : ILoanService
         {
             return ResultViewModel<int>.Error("Book not found.");
         }
-        book.Loaned();
+
+        if (book.Status != BookStatusEnum.Available)
+        {
+            return ResultViewModel<int>.Error("Livro ja emprestado");
+        }
+        
 
         var loan = model.ToEntity();
         _context.Add(loan);
+        book.Loaned();
+        _context.Update(book);
         _context.SaveChanges();
         return ResultViewModel<int>.Sucess(loan.Id);
     }
 
-    public ResultViewModel<int> Delete(int id)
+    public ResultViewModel Delete(int id)
     {
         var loan = _context.Loans.SingleOrDefault(l => l.Id == id);
         
-        
         if (loan == null)
         {
-            return (ResultViewModel<int>)ResultViewModel.Error("Emprestimo Não Encontrado");
+            return ResultViewModel.Error("Emprestimo Não Encontrado");
+        }
+
+        var book = _context.Books.SingleOrDefault(b => b.Id == loan.IdBook);
+        if (book !=null)
+        {
+            book.MakesAvailable();
+            _context.SaveChanges();
         }
         loan.SetAsDeleted();
         _context.SaveChanges();
-        return (ResultViewModel<int>)ResultViewModel.Sucess();
+        return ResultViewModel.Sucess();
     }
     }

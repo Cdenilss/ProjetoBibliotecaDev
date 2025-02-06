@@ -24,6 +24,7 @@ public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand,Result
         }
 
         book.SetAsDeleted();
+        book.MakesUnavailable();
         _context.Update(book);
         await _context.SaveChangesAsync();
         return ResultViewModel.Sucess();

@@ -22,7 +22,9 @@ namespace ProjetoBiblioteca.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok();
+            var result = _services.GetAll();
+            
+            return Ok(result);
         }
         
         [HttpGet("{id}")]
