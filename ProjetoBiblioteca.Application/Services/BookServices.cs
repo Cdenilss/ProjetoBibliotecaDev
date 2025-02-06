@@ -53,68 +53,7 @@ namespace ProjetoBiblioteca.Application.Services
             _context.SaveChanges();
             return ResultViewModel<int>.Sucess(book.Id);
         }
-        public ResultViewModel Loaned(int id)
-        {
-            var book = _context.Books.SingleOrDefault(b => b.Id == id);
-
-            if (book == null)
-            {
-                return ResultViewModel.Error("Livro Não encontrado");
-            }
-
-            book.Loaned();
-            _context.Update(book);
-            _context.SaveChanges();
-            return ResultViewModel.Sucess();
-        }
-
-
-
-        public ResultViewModel MakesAvailable(int id)
-        {
-            var book = _context.Books.SingleOrDefault(b => b.Id == id);
-
-            if (book == null)
-            {
-                return ResultViewModel.Error("Livro Não encontrado");
-            }
-
-            book.MakesAvailable();
-            _context.Update(book);
-            _context.SaveChanges();
-            return ResultViewModel.Sucess();
-        }
-
-        public ResultViewModel Reserved(int id)
-        {
-            var book = _context.Books.SingleOrDefault(b => b.Id == id);
-
-            if (book == null)
-            {
-                return ResultViewModel.Error("Livro Não encontrado");
-            }
-
-            book.Reserved();
-            _context.Update(book);
-            _context.SaveChanges();
-            return ResultViewModel.Sucess();
-        }
-
-        public ResultViewModel MakesUnvailable(int id)
-        {
-            var book = _context.Books.SingleOrDefault(b => b.Id == id);
-
-            if (book == null)
-            {
-                return ResultViewModel.Error("Livro Não encontrado");
-            }
-
-            book.MakesUnavailable();
-            _context.Update(book);
-            _context.SaveChanges();
-            return ResultViewModel.Sucess();
-        }
-
+       
         public ResultViewModel Delete(int id)
         {
             var book = _context.Books.SingleOrDefault(b => b.Id == id);

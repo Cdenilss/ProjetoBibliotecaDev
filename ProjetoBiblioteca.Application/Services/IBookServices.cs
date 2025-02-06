@@ -9,10 +9,6 @@ namespace ProjetoBiblioteca.Application.Services
         ResultViewModel<List<BookItemViewModel>> GetAll();
         ResultViewModel<BookViewModel> FindById(int id);
         ResultViewModel<int> Insert(CreateBooksInputModel model);
-        ResultViewModel Loaned(int id);
-        ResultViewModel MakesAvailable(int id);
-        ResultViewModel Reserved(int id);
-        ResultViewModel MakesUnvailable(int id);
         ResultViewModel Delete(int id);
     }
 }

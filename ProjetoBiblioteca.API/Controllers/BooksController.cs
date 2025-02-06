@@ -48,53 +48,7 @@ public class BooksController : ControllerBase
         return CreatedAtAction(nameof(FindBookById), new { id = result.Data }, model);
     }
 
-    [HttpPut("{id}/Loaned")]
-    public IActionResult Loaned(int id)
-    {
-        var result = _services.Loaned(id);
-        if (!result.IsSucess)
-        {
-            return BadRequest(result.Message);
-        }
-
-        return NoContent();
-    }
-   
-    [HttpPut("{id}/MakesAvailable")]
-    public IActionResult MakesAvailable(int id)
-    {
-        var result = _services.MakesAvailable(id);
-        if (!result.IsSucess)
-        {
-            return BadRequest(result.Message);
-        }
-
-        return NoContent();
-        
-        
-    }
-    [HttpPut("{id}/Reserved")]
-    public IActionResult Reserved(int id)
-    {
-        var result = _services.Reserved(id);
-        if (!result.IsSucess)
-        {
-            return BadRequest(result.Message);
-        }
-
-        return NoContent();
-    }
-    [HttpPut("{id}/MakesUnvailable")]
-    public IActionResult MakesUnvailable(int id)
-    {
-        var result = _services.MakesUnvailable(id);
-        if (!result.IsSucess)
-        {
-            return BadRequest(result.Message);
-        }
-
-        return NoContent();
-    }
+    
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
