@@ -15,6 +15,22 @@ public class LoanServices : ILoanService
     {
         _context = context;
     }
+
+    public ResultViewModel<List<LoanViewModel>> Getall()
+    {
+        var loan = _context.Loans
+            .Where(b => !b.IsDeleted).ToList();
+
+        if (loan == null)
+        {
+            return ResultViewModel<List<LoanViewModel>>.Error("Lista de Livros Vazia");
+        }
+
+        var model = loan.Select(b => LoanViewModel.FromEntity(b)).ToList();
+
+        return ResultViewModel<List<LoanViewModel>>.Sucess(model);
+    }
+
     public ResultViewModel<LoanViewModel> GetLoanById(int id)
     {
         var loans = _context.Loans
@@ -46,4 +62,18 @@ public class LoanServices : ILoanService
         _context.SaveChanges();
         return ResultViewModel<int>.Sucess(loan.Id);
     }
-}
+
+    public ResultViewModel<int> Delete(int id)
+    {
+        var loan = _context.Loans.SingleOrDefault(l => l.Id == id);
+        
+        
+        if (loan == null)
+        {
+            return (ResultViewModel<int>)ResultViewModel.Error("Emprestimo Não Encontrado");
+        }
+        loan.SetAsDeleted();
+        _context.SaveChanges();
+        return (ResultViewModel<int>)ResultViewModel.Sucess();
+    }
+    }

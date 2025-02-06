@@ -21,13 +21,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Commands\BookCommand\DeleteBook\" />
-      <Folder Include="Commands\BookCommand\InsertBook\" />
-      <Folder Include="Commands\BookCommand\LoanBookCommand\" />
-      <Folder Include="Commands\BookCommand\MakeBookAvailableCommand\" />
-      <Folder Include="Commands\BookCommand\MakeBookUnavailableCommand\" />
-      <Folder Include="Commands\BookCommand\ReserveBookCommand\" />
-      <Folder Include="Queries\" />
+      <Folder Include="Queries\BookQueries\GetAllBookQueries\" />
+      <Folder Include="Queries\BookQueries\GetBookByIdQueries\" />
     </ItemGroup>
 
 </Project>

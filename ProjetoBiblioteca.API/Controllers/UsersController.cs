@@ -1,9 +1,5 @@
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ProjetoBiblioteca.Application.Models.InputModels;
-using ProjetoBiblioteca.Application.Models.ViewModel;
 using ProjetoBiblioteca.Application.Services;
 using ProjetoBiblioteca.Infrastructure.Persistence;
 
@@ -16,12 +12,10 @@ namespace ProjetoBiblioteca.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly LibraryDbContext _context;
         private readonly IUserService _services;
 
         public UsersController(LibraryDbContext context, IUserService services)
         {
-            _context = context;
             _services = services;
         }
 

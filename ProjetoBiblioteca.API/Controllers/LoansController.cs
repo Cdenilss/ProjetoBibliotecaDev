@@ -18,7 +18,13 @@ namespace ProjetoBiblioteca.Controllers
             _context = context;
             _services = services;
         }
-       
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            return Ok();
+        }
+        
         [HttpGet("{id}")]
         public IActionResult GetLoanById(int id )
         {
@@ -37,6 +43,18 @@ namespace ProjetoBiblioteca.Controllers
         {
             var result = _services.Insert(model);
             return CreatedAtAction(nameof(GetLoanById), new { id = result.Data }, model);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var result = _services.Delete(id);
+            if (!result.IsSucess)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return NoContent();
         }
         
         

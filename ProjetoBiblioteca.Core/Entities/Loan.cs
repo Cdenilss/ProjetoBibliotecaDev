@@ -26,4 +26,6 @@ public class Loan : BaseEntity
     public Book Book { get; private set; }
     public DateTime LoanDate { get; private set; }
     public DateTime ReturnDate { get; private set; }
+
+   
 }

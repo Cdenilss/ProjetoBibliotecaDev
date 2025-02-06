@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjetoBiblioteca.Application.Models.InputModels;
-using ProjetoBiblioteca.Infrastructure.Persistence;
 using ProjetoBiblioteca.Application.Services;
 
 
@@ -11,14 +10,11 @@ namespace ProjetoBiblioteca.Controllers;
 
 public class BooksController : ControllerBase
 {
-
-    private readonly LibraryDbContext _context;
     private readonly IBookServices _services;
 
 
-    public BooksController(LibraryDbContext context, IBookServices services)
+    public BooksController(IBookServices services)
     {
-        _context = context;
         _services = services;
     }
     

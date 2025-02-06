@@ -62,7 +62,7 @@ public class UserService : IUserService
             return ResultViewModel.Error("User não encontrado");
         }
 
-        user.Update(user.Name, user.Email);
+        
         _context.Users.Update(user);
         _context.SaveChanges();
             
@@ -79,7 +79,6 @@ public class UserService : IUserService
         }
 
         user.SetAsDeleted();
-        _context.Users.Update(user);
         _context.SaveChanges();
             
         return ResultViewModel.Sucess();
