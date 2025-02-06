@@ -21,8 +21,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Queries\BookQueries\GetAllBookQueries\" />
-      <Folder Include="Queries\BookQueries\GetBookByIdQueries\" />
+      <Folder Include="Commands\BookCommands\" />
+      <Folder Include="Commands\LoanCommands\" />
+      <Folder Include="Queries\UserQueries\" />
     </ItemGroup>
 
 </Project>

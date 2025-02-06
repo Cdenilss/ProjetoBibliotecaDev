@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ProjetoBiblioteca.Application.Models.ViewModel;
 using ProjetoBiblioteca.Infrastructure.Persistence;
 
-namespace ProjetoBiblioteca.Application.Commands.DeleteBook;
+namespace ProjetoBiblioteca.Application.Commands.BookCommands.DeleteBook;
 
 public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand,ResultViewModel>
 {

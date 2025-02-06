@@ -2,7 +2,7 @@ using MediatR;
 using ProjetoBiblioteca.Application.Models.ViewModel;
 using ProjetoBiblioteca.Infrastructure.Persistence;
 
-namespace ProjetoBiblioteca.Application.Commands.InsertBook;
+namespace ProjetoBiblioteca.Application.Commands.BookCommands.InsertBook;
 
 public class InsertBookCommandHandler : IRequestHandler<InsertBookCommand,ResultViewModel<int>>
 {
