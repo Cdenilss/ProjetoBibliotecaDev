@@ -1,10 +1,9 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ProjetoBiblioteca.Application.Models.ViewModel;
-using ProjetoBiblioteca.Application.Queries.LoanQuery.GetAllLoans;
 using ProjetoBiblioteca.Infrastructure.Persistence;
 
-namespace ProjetoBiblioteca.Application.Services.Queries.LoanQuery.GetAllLoans;
+namespace ProjetoBiblioteca.Application.Queries.LoanQuery.GetAllLoans;
 
 public class GetAllLoansQueryHandler : IRequestHandler<GetAllLoansQuery,ResultViewModel<List<LoanViewModel>>>
 {
@@ -17,8 +16,10 @@ public class GetAllLoansQueryHandler : IRequestHandler<GetAllLoansQuery,ResultVi
 
     public  async Task<ResultViewModel<List<LoanViewModel>>> Handle(GetAllLoansQuery request, CancellationToken cancellationToken)
     {
-        var loan = await _context.Loans
-            .Where(l => !l.IsDeleted).ToListAsync();
+        var loan = await _context.Loans.Where(l => !l.IsDeleted)
+            .Include(l => l.User) // 
+            .Include(l => l.Book) // 
+            .ToListAsync();
 
         if (loan==null) 
         {

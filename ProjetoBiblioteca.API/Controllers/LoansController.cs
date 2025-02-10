@@ -7,7 +7,6 @@ using ProjetoBiblioteca.Application.Queries.LoanQuery.GetAllLoans;
 using ProjetoBiblioteca.Application.Queries.LoanQuery.GetLoanById;
 using ProjetoBiblioteca.Application.Services;
 using ProjetoBiblioteca.Application.Services.Commands.LoanCommands.DeleteLoan;
-using ProjetoBiblioteca.Application.Services.Queries.LoanQuery.GetAllLoans;
 
 
 namespace ProjetoBiblioteca.Controllers

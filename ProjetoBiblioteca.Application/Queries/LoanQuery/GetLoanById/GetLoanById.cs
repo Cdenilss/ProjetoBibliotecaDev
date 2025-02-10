@@ -1,6 +1,5 @@
 using MediatR;
 using ProjetoBiblioteca.Application.Models.ViewModel;
-using ProjetoBiblioteca.Application.Services.Queries.LoanQuery.GetAllLoans;
 
 namespace ProjetoBiblioteca.Application.Queries.LoanQuery.GetLoanById;
 
