@@ -22,7 +22,6 @@
 
     <ItemGroup>
       <Folder Include="Commands\BookCommands\" />
-      <Folder Include="Commands\LoanCommands\" />
       <Folder Include="Queries\UserQueries\" />
     </ItemGroup>
 

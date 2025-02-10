@@ -1,18 +1,44 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace ProjetoBiblioteca.Infrastructure.Serialization;
+using System;
+using System.Globalization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
+namespace ProjetoBiblioteca.Infrastructure.Serialization
+{
+    using System;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
 
-    public class DateFormatJsonConverter : JsonConverter<DateTime>
+    namespace ProjetoBiblioteca.Infrastructure.Serialization
     {
-        public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public class DateFormatJsonConverter : JsonConverter<DateTime>
         {
-            return DateTime.ParseExact(reader.GetString(), "yyyy-MM-dd HH:mm:ss.fffffff", null);
-        }
+            public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                if (reader.TokenType != JsonTokenType.String)
+                {
+                    throw new JsonException("Formato de data inválido.");
+                }
 
-        public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
-        {
-            writer.WriteStringValue(value.ToString("dd-MM-yyyy"));
+                var dateString = reader.GetString();
+
+                if (DateTime.TryParse(dateString, out DateTime date))
+                {
+                    return date;
+                }
+
+                throw new JsonException("Formato de data inválido.");
+            }
+
+            public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+            {
+                // Formato dd-MM-yy
+                writer.WriteStringValue(value.ToString("dd-MM-yy"));
+            }
         }
     }
+
+}
