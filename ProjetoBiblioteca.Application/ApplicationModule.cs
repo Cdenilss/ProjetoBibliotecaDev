@@ -1,6 +1,8 @@
 using System.Collections.Immutable;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using ProjetoBiblioteca.Application.Commands.BookCommands.InsertBook;
+using ProjetoBiblioteca.Application.Models.ViewModel;
 
 namespace ProjetoBiblioteca.Application.Services;
 
@@ -27,6 +29,8 @@ public static class ApplicationModule
         services.AddMediatR(config =>
             config.RegisterServicesFromAssemblyContaining<InsertBookCommand>()
         );
+        services.AddTransient<IPipelineBehavior<InsertBookCommand, ResultViewModel<int>>,
+            ValidateInsertBookCommandBehavior>();
         return services;
     }
 }

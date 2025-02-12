@@ -11,11 +11,11 @@ public class CreateBooksInputModel
     public string Author { get;  set; }
     public string ISBN { get;  set; }
     
-    public DateTime YearOfPublication { get;   set; }
+    public int YearOfPublication { get;   set; }
     
 
     public Book ToEntity()
-        => new( Title , Author,ISBN, YearOfPublication.Year, BookStatusEnum.Available);
+        => new( Title , Author,ISBN, YearOfPublication, BookStatusEnum.Available);
     
 
 }
