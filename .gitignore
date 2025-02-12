@@ -1,6 +1,9 @@
 
+*.dll
 bin/
 obj/
+
+*.pdb
 
 
 .vscode/

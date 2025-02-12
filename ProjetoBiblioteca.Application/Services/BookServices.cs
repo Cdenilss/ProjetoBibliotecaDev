@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ProjetoBiblioteca.Application.Models.InputModels;
 using ProjetoBiblioteca.Application.Models.ViewModel;
-using ProjetoBiblioteca.Application.Services;
 using ProjetoBiblioteca.Infrastructure.Persistence;
 
 namespace ProjetoBiblioteca.Application.Services

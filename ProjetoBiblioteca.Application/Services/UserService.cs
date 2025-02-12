@@ -61,7 +61,8 @@ public class UserService : IUserService
         {
             return ResultViewModel.Error("User não encontrado");
         }
-
+        
+        user.Update(model.Name,model.Email);
         
         _context.Users.Update(user);
         _context.SaveChanges();

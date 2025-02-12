@@ -1,8 +1,12 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ProjetoBiblioteca.Application.Commands.UserCommands.DeleteUser;
 using ProjetoBiblioteca.Application.Models.InputModels;
 using ProjetoBiblioteca.Application.Services;
-using ProjetoBiblioteca.Infrastructure.Persistence;
-
+using ProjetoBiblioteca.Application.Services.Commands.UserCommands.InsertUser;
+using ProjetoBiblioteca.Application.Services.Commands.UserCommands.PutUser;
+using ProjetoBiblioteca.Application.Services.Queries.UserQueries.FindByIdUser;
+using ProjetoBiblioteca.Application.Services.Queries.UserQueries.GetAllUser;
 
 
 namespace ProjetoBiblioteca.Controllers
@@ -13,24 +17,26 @@ namespace ProjetoBiblioteca.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _services;
+        private readonly IMediator _mediator;
 
-        public UsersController(LibraryDbContext context, IUserService services)
+        public UsersController(IUserService services, IMediator mediator)
         {
             _services = services;
+            _mediator = mediator;
         }
 
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _services.GetAll();
-            
+            var query = new GetAllUserQuery();
+            var result = await _mediator.Send(query);
             return Ok(result);
         }
         [HttpGet("{id}")]
-        public IActionResult FindUserById(int id)
+        public async Task<IActionResult> FindUserById(int id)
         {
-            var result = _services.FindUserById(id);
+            var result = await _mediator.Send(new FindByIdUserQuery(id));
             if (!result.IsSucess)
             {
                 return BadRequest(result.Message);
@@ -41,17 +47,18 @@ namespace ProjetoBiblioteca.Controllers
         
         
         [HttpPost]
-        public IActionResult PostUser(CreateUserInputModel model)
+        public async Task<IActionResult> PostUser(InsertUserCommand command)
         {
-            var result = _services.Insert(model);
-            return CreatedAtAction(nameof(FindUserById), new { id = result.Data}, model);
+           
+            var result = await _mediator.Send(command);
+            return CreatedAtAction(nameof(FindUserById), new { id = result.Data}, command);
             
         }
         
         [HttpPut("{id}")]
-        public IActionResult Put(int id, UpdateUserInputModel model)
+        public async Task<IActionResult> Put(int id, UpdateUserCommand command)
         {
-            var result = _services.Put(id,model);
+            var result = await _mediator.Send(command);
             if (!result.IsSucess)
             {
                 return BadRequest(result.Message);
@@ -62,9 +69,9 @@ namespace ProjetoBiblioteca.Controllers
         }
         
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var result = _services.Delete(id);
+            var result = await _mediator.Send(new DeleteUserCommand(id));
             if (!result.IsSucess)
             {
                 return BadRequest(result.Message);

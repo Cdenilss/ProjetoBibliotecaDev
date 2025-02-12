@@ -4,13 +4,14 @@ using ProjetoBiblioteca.Application.Services;
 using ProjetoBiblioteca.ExceptionHandler;
 using ProjetoBiblioteca.Infrastructure.Persistence;
 using ProjetoBiblioteca.Infrastructure.Serialization;
+using ProjetoBiblioteca.Infrastructure.Serialization.ProjetoBiblioteca.Infrastructure.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

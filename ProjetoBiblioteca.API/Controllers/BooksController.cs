@@ -1,6 +1,9 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ProjetoBiblioteca.Application.Models.InputModels;
-using ProjetoBiblioteca.Application.Services;
+using ProjetoBiblioteca.Application.Commands.BookCommands.DeleteBook;
+using ProjetoBiblioteca.Application.Commands.BookCommands.InsertBook;
+using ProjetoBiblioteca.Application.Queries.BookQueries.GetAllBooks;
+using ProjetoBiblioteca.Application.Queries.BookQueries.GetBooksById;
 
 
 namespace ProjetoBiblioteca.Controllers;
@@ -10,19 +13,20 @@ namespace ProjetoBiblioteca.Controllers;
 
 public class BooksController : ControllerBase
 {
-    private readonly IBookServices _services;
+    private readonly IMediator _mediator;
 
 
-    public BooksController(IBookServices services)
+    public BooksController(IMediator mediator)
     {
-        _services = services;
+        _mediator = mediator;
     }
     
     [HttpGet("{id}")]
 
-    public IActionResult FindBookById(int id)
+    public async Task<IActionResult> FindBookById(int id)
     {
-        var result = _services.FindById(id);
+        var result = await _mediator.Send(new GetBookByIdQueries(id));
+        
         if (!result.IsSucess)
         {
           return BadRequest(result.Message);
@@ -32,34 +36,35 @@ public class BooksController : ControllerBase
     }
     
     [HttpGet]
-    public IActionResult GetAll()
+    public async Task<IActionResult> GetAll()
     {
 
-        var result = _services.GetAll();
+        //var result = _services.GetAll();
+        var query = new GetAllBooksQueries();
+
+        var result = await _mediator.Send(query);
         return Ok(result);
         
     }
     
      
     [HttpPost]
-    public IActionResult Post(CreateBooksInputModel model)
+    public async Task<IActionResult> Post(InsertBookCommand command)
     {
-        var result = _services.Insert(model);
-        return CreatedAtAction(nameof(FindBookById), new { id = result.Data }, model);
+        var result = await _mediator.Send(command);
+        return CreatedAtAction(nameof(FindBookById), new { id = result.Data }, command);
     }
 
     
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
-        var result = _services.Delete(id);
+        var result = await _mediator.Send(new DeleteBookCommand(id));
         if (!result.IsSucess)
         {
             return BadRequest(result.Message);
         }
-
         return NoContent();
-
     }
     
 }

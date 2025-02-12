@@ -1,5 +1,6 @@
 
 using System.Runtime.InteropServices.JavaScript;
+using System.Text.Json.Serialization;
 using ProjetoBiblioteca.Core.Entities;
 using ProjetoBiblioteca.Core.Enums;
 

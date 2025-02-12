@@ -1,7 +1,7 @@
 using MediatR;
 using ProjetoBiblioteca.Application.Models.ViewModel;
 
-namespace ProjetoBiblioteca.Application.Commands.DeleteBook;
+namespace ProjetoBiblioteca.Application.Commands.BookCommands.DeleteBook;
 
 public class DeleteBookCommand :  IRequest<ResultViewModel>
 {

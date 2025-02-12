@@ -3,7 +3,7 @@ using ProjetoBiblioteca.Application.Models.ViewModel;
 using ProjetoBiblioteca.Core.Entities;
 using ProjetoBiblioteca.Core.Enums;
 
-namespace ProjetoBiblioteca.Application.Commands.InsertBook;
+namespace ProjetoBiblioteca.Application.Commands.BookCommands.InsertBook;
 
 public class InsertBookCommand:  IRequest<ResultViewModel<int>>
 {
