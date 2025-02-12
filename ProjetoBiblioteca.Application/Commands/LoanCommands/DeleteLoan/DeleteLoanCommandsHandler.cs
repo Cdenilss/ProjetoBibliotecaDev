@@ -27,10 +27,10 @@ public class DeleteLoanCommandsHandler : IRequestHandler<DeleteLoanCommands, Res
         if (book !=null)
         {
             book.MakesAvailable();
-            _context.SaveChangesAsync();
+           await _context.SaveChangesAsync();
         }
         loan.SetAsDeleted();
-        _context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
         return ResultViewModel.Sucess();
     }
 }
