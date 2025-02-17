@@ -43,7 +43,7 @@ public class LoanRepository : ILoanRepository
 
     public async Task<bool> Exists(int id)
     {
-        return await _context.Loans.AnyAsync(b => b.Id == id);
+        return await _context.Loans.AnyAsync(l => l.Id == id);
     }
 
     public async Task Update(Loan loan)

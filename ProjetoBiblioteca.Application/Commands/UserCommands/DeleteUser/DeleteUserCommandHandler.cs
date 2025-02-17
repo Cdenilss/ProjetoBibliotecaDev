@@ -1,21 +1,22 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ProjetoBiblioteca.Application.Models.ViewModel;
+using ProjetoBiblioteca.Core.Repositories;
 using ProjetoBiblioteca.Infrastructure.Persistence;
 
 namespace ProjetoBiblioteca.Application.Commands.UserCommands.DeleteUser;
 
 public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, ResultViewModel>
 {
-    private readonly LibraryDbContext _context;
+    private readonly IUserRepository _repository;
 
-    public DeleteUserCommandHandler(LibraryDbContext context)
+    public DeleteUserCommandHandler(IUserRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
     public async Task<ResultViewModel> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
     {
-        var user = await _context.Users.SingleOrDefaultAsync(u => u.Id == request.Id);
+        var user = await _repository.GetById(request.Id);
 
         if (user is null)
         {
@@ -23,7 +24,8 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Resul
         }
 
         user.SetAsDeleted();
-        await _context.SaveChangesAsync();
+        await _repository.Update(user);
+        
             
         return ResultViewModel.Sucess();
     }
