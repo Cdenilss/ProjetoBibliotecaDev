@@ -1,6 +1,7 @@
 using MediatR;
 using ProjetoBiblioteca.Application.Models.ViewModel;
 using ProjetoBiblioteca.Core.Enums;
+using ProjetoBiblioteca.Core.Repositories;
 using ProjetoBiblioteca.Infrastructure.Persistence;
 
 namespace ProjetoBiblioteca.Application.Commands.LoanCommands.InsertLoan;
@@ -9,9 +10,11 @@ public class InsertLoanCommandHandler : IRequestHandler<InsertLoanCommands,Resul
 {
     private readonly LibraryDbContext _context;
 
-    public InsertLoanCommandHandler(LibraryDbContext context)
+    private readonly ILoanRepository _repository;
+
+    public InsertLoanCommandHandler(ILoanRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
     public async Task<ResultViewModel<int>> Handle(InsertLoanCommands request, CancellationToken cancellationToken)
     {
@@ -20,18 +23,15 @@ public class InsertLoanCommandHandler : IRequestHandler<InsertLoanCommands,Resul
         {
             return ResultViewModel<int>.Error("Book not found.");
         }
-
         if (book.Status != BookStatusEnum.Available)
         {
             return ResultViewModel<int>.Error("Livro ja emprestado");
         }
-        
-
-        var loan =  request.ToEntity();
-        await _context.AddAsync(loan);
         book.Loaned(); 
         _context.Update(book);
+        var loans = request.ToEntity();
+        await _repository.Add(loans);
         await _context.SaveChangesAsync();
-        return ResultViewModel<int>.Sucess(loan.Id);
+        return ResultViewModel<int>.Sucess(loans.Id);
     }
 }
