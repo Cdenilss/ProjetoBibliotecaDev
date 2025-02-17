@@ -1,8 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoBiblioteca.Application.Commands.UserCommands.DeleteUser;
-using ProjetoBiblioteca.Application.Models.InputModels;
-using ProjetoBiblioteca.Application.Services;
 using ProjetoBiblioteca.Application.Services.Commands.UserCommands.InsertUser;
 using ProjetoBiblioteca.Application.Services.Commands.UserCommands.PutUser;
 using ProjetoBiblioteca.Application.Services.Queries.UserQueries.FindByIdUser;
@@ -16,12 +14,10 @@ namespace ProjetoBiblioteca.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService _services;
         private readonly IMediator _mediator;
 
-        public UsersController(IUserService services, IMediator mediator)
+        public UsersController(IMediator mediator)
         {
-            _services = services;
             _mediator = mediator;
         }
 

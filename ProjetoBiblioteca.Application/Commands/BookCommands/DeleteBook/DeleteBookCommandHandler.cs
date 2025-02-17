@@ -1,22 +1,21 @@
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using ProjetoBiblioteca.Application.Models.ViewModel;
-using ProjetoBiblioteca.Infrastructure.Persistence;
+using ProjetoBiblioteca.Core.Repositories;
 
 namespace ProjetoBiblioteca.Application.Commands.BookCommands.DeleteBook;
 
 public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand,ResultViewModel>
 {
-    private readonly LibraryDbContext _context;
+    private readonly IBookRepository _repository;
 
-    public DeleteBookCommandHandler(LibraryDbContext context)
+    public DeleteBookCommandHandler(IBookRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public async Task<ResultViewModel> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
     {
-        var book = await _context.Books.SingleOrDefaultAsync(b => b.Id == request.Id);
+        var book = await _repository.GetById(request.Id);
 
         if (book == null)
         {
@@ -25,8 +24,7 @@ public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand,Result
 
         book.SetAsDeleted();
         book.MakesUnavailable();
-        _context.Update(book);
-        await _context.SaveChangesAsync();
+        await _repository.Update(book);
         return ResultViewModel.Sucess();
     }
 }

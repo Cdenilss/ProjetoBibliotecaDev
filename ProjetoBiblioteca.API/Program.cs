@@ -1,9 +1,7 @@
 using System.Text.Json.Serialization;
-using Microsoft.EntityFrameworkCore;
-using ProjetoBiblioteca.Application.Services;
+using ProjetoBiblioteca.Application;
 using ProjetoBiblioteca.ExceptionHandler;
-using ProjetoBiblioteca.Infrastructure.Persistence;
-using ProjetoBiblioteca.Infrastructure.Serialization;
+using ProjetoBiblioteca.Infrastructure;
 using ProjetoBiblioteca.Infrastructure.Serialization.ProjetoBiblioteca.Infrastructure.Serialization;
 
 
@@ -18,7 +16,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddExceptionHandler<ApiExceptionHandler>();
 builder.Services.AddProblemDetails();
 builder.Services
-    .AddApplication();
+    .AddApplication()
+    .AddInfrastrucutre(builder.Configuration);
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
@@ -26,9 +25,6 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 });
 
-//builder.Services.AddDbContext<LibaryDbContext>(o => o.UseInMemoryDatabase("LibaryDb"));
-var connectionString = builder.Configuration.GetConnectionString("BibliotecaDevCs");
-builder.Services.AddDbContext<LibraryDbContext>(o => o.UseSqlServer(connectionString));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1057,6 +1057,7 @@
       },
       "ProjetoBiblioteca.Core/1.0.0": {
         "dependencies": {
+          "MediatR": "12.4.1",
           "Microsoft.EntityFrameworkCore": "9.0.1"
         },
         "runtime": {
@@ -1065,6 +1066,7 @@
       },
       "ProjetoBiblioteca.Infrastructure/1.0.0": {
         "dependencies": {
+          "MediatR": "12.4.1",
           "Microsoft.EntityFrameworkCore": "9.0.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.1",
           "ProjetoBiblioteca.Core": "1.0.0"

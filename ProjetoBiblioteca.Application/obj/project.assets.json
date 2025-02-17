@@ -1637,6 +1637,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "MediatR": "12.4.1",
           "Microsoft.EntityFrameworkCore": "9.0.1"
         },
         "compile": {
@@ -1650,6 +1651,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "MediatR": "12.4.1",
           "Microsoft.EntityFrameworkCore": "9.0.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.1",
           "ProjetoBiblioteca.Core": "1.0.0"

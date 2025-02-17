@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "nnjwiF1JctEv2DLn/iGD3PYFHn0Vkd+zfYN5TPwUmttviqYIce5gMXslDvHAtEh5jIJP5p8WWRKAbKN+15uFlQ==",
+  "dgSpecHash": "mUaLltN3iLR9G+oJ7L3SnTHibvz30BvUxFsZGTpvPnDHDCjWXHziojUxTvSigp03/4sD+Ppzq/6tzweQaosCYg==",
   "success": true,
   "projectFilePath": "/Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Infrastructure/ProjetoBiblioteca.Infrastructure.csproj",
   "expectedPackageFiles": [
     "/Users/carlosdenil/.nuget/packages/azure.core/1.38.0/azure.core.1.38.0.nupkg.sha512",
     "/Users/carlosdenil/.nuget/packages/azure.identity/1.11.4/azure.identity.1.11.4.nupkg.sha512",
     "/Users/carlosdenil/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/carlosdenil/.nuget/packages/mediatr/12.4.1/mediatr.12.4.1.nupkg.sha512",
+    "/Users/carlosdenil/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
     "/Users/carlosdenil/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "/Users/carlosdenil/.nuget/packages/microsoft.build.framework/17.8.3/microsoft.build.framework.17.8.3.nupkg.sha512",
     "/Users/carlosdenil/.nuget/packages/microsoft.build.locator/1.7.8/microsoft.build.locator.1.7.8.nupkg.sha512",
