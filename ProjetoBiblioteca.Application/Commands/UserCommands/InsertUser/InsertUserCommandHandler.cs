@@ -1,22 +1,22 @@
 using MediatR;
 using ProjetoBiblioteca.Application.Models.ViewModel;
+using ProjetoBiblioteca.Core.Repositories;
 using ProjetoBiblioteca.Infrastructure.Persistence;
 
 namespace ProjetoBiblioteca.Application.Services.Commands.UserCommands.InsertUser;
 
 public class InsertUserCommandHandler : IRequestHandler<InsertUserCommand, ResultViewModel<int>>
 {
-    private readonly LibraryDbContext _context;
+    private readonly IUserRepository _repository;
 
-    public InsertUserCommandHandler(LibraryDbContext context)
+    public InsertUserCommandHandler(IUserRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
     public async Task<ResultViewModel<int>> Handle(InsertUserCommand request, CancellationToken cancellationToken)
     {
         var user =  request.ToEntity();
-        await _context.AddAsync(user);
-        await _context.SaveChangesAsync();
+        await _repository.Add(user);
         return ResultViewModel<int>.Sucess(user.Id);
     }
 }

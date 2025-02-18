@@ -1,11 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoBiblioteca.Application.Commands.LoanCommands.InsertLoan;
-using ProjetoBiblioteca.Application.Models.InputModels;
-using ProjetoBiblioteca.Application.Queries.BookQueries.GetAllBooks;
 using ProjetoBiblioteca.Application.Queries.LoanQuery.GetAllLoans;
 using ProjetoBiblioteca.Application.Queries.LoanQuery.GetLoanById;
-using ProjetoBiblioteca.Application.Services;
 using ProjetoBiblioteca.Application.Services.Commands.LoanCommands.DeleteLoan;
 
 
@@ -15,12 +12,10 @@ namespace ProjetoBiblioteca.Controllers
     [ApiController]
     public class LoansController : ControllerBase
     {
-        private readonly ILoanService _services;
         private readonly IMediator _mediator;
         
-        public LoansController(ILoanService services,IMediator mediator)
+        public LoansController(IMediator mediator)
         {
-            _services = services;
             _mediator = mediator; 
         }
 

@@ -1,23 +1,23 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ProjetoBiblioteca.Application.Models.ViewModel;
+using ProjetoBiblioteca.Core.Repositories;
 using ProjetoBiblioteca.Infrastructure.Persistence;
 
 namespace ProjetoBiblioteca.Application.Queries.BookQueries.GetAllBooks;
 
 public class GetAllBooksQueriesHandler: IRequestHandler<GetAllBooksQueries,ResultViewModel<List<BookItemViewModel>>>
 {
-    private readonly LibraryDbContext _context;
+    
+    private readonly IBookRepository _repository;
 
-    public GetAllBooksQueriesHandler(LibraryDbContext context)
+    public GetAllBooksQueriesHandler(IBookRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
-
     public async Task<ResultViewModel<List<BookItemViewModel>>> Handle(GetAllBooksQueries request, CancellationToken cancellationToken)
     {
-        var books = await _context.Books
-            .Where(b => !b.IsDeleted).ToListAsync();
+        var books = await _repository.GetAll();
 
         if (books == null)
         {

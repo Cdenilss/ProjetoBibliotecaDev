@@ -1,23 +1,22 @@
 using MediatR;
 using ProjetoBiblioteca.Application.Models.ViewModel;
-using ProjetoBiblioteca.Infrastructure.Persistence;
+using ProjetoBiblioteca.Core.Repositories;
 
 namespace ProjetoBiblioteca.Application.Commands.BookCommands.InsertBook;
 
 public class InsertBookCommandHandler : IRequestHandler<InsertBookCommand,ResultViewModel<int>>
 {
-    private readonly LibraryDbContext _context;
+    private readonly IBookRepository _repository;
 
-    public InsertBookCommandHandler(LibraryDbContext context)
+    public InsertBookCommandHandler(IBookRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
     public async Task<ResultViewModel<int>> Handle(InsertBookCommand request, CancellationToken cancellationToken)
     {
 
             var book = request.ToEntity();
-         await _context.Books.AddAsync(book);
-          await  _context.SaveChangesAsync();
+            await _repository.Add(book);
           return ResultViewModel<int>.Sucess(book.Id);
     }
 }

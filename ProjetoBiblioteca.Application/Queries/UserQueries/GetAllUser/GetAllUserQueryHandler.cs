@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ProjetoBiblioteca.Application.Models.ViewModel;
+using ProjetoBiblioteca.Core.Repositories;
 using ProjetoBiblioteca.Infrastructure.Persistence;
 
 namespace ProjetoBiblioteca.Application.Services.Queries.UserQueries.GetAllUser;
@@ -8,16 +9,15 @@ namespace ProjetoBiblioteca.Application.Services.Queries.UserQueries.GetAllUser;
 public class GetAllUserQueryHandler : IRequestHandler<GetAllUserQuery, ResultViewModel<List<UserViewModel>>>
 
 {
-    private readonly LibraryDbContext _context;
+    private readonly IUserRepository _repository;
 
-    public GetAllUserQueryHandler(LibraryDbContext context)
+    public GetAllUserQueryHandler(IUserRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
     public async Task<ResultViewModel<List<UserViewModel>>> Handle(GetAllUserQuery request, CancellationToken cancellationToken)
     {
-        var user = await _context.Users
-            .Where(u => !u.IsDeleted).ToListAsync();
+        var user = await _repository.GetAll();
 
         if (user==null)
         {
