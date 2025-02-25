@@ -7,17 +7,16 @@ namespace ProjetoBiblioteca.Core.Entities;
 
 public class User: BaseEntity
 {
-        public User(int id, string name, string email, bool active, List<Loan> loansList)
+        public User( string name, string email, bool active, List<Loan> loansList)
             : base()
         {
-            Id = id;
+            
             Name = name;
             Email = email;
             Active = active;
             LoansList = loansList ?? new List<Loan>();
         }
-
-        public int Id { get; private set; }
+        
         public string Name { get; private set; }
         public string Email { get; private set; }
         public bool Active { get; private set; }

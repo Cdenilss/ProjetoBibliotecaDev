@@ -1,9 +1,4 @@
 using ProjetoBiblioteca.Core.Entities;
-using ProjetoBiblioteca.Infrastructure.Serialization;
-using System.Text.Json.Serialization;
-using ProjetoBiblioteca.Infrastructure.Serialization.ProjetoBiblioteca.Infrastructure.Serialization;
-
-
 namespace ProjetoBiblioteca.Application.Models.ViewModel;
 
 public class LoanViewModel

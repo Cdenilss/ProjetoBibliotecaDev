@@ -25,7 +25,7 @@ public class UserRepository : IUserRepository
     {
         var user = await _context.Users
             .Include(u => u.LoansList)
-            .ThenInclude(l => l.Book)
+            .ThenInclude(l => l.Book.Title)
             .SingleOrDefaultAsync(u => u.Id == id);
         return user;
     }

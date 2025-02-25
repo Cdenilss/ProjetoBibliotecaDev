@@ -23,6 +23,8 @@ public static class InfrastructureModule
         services.AddDbContext<LibraryDbContext>(o => o.UseSqlServer(connectionString));
         return services;
         
+        
+        
     }
 
     private static IServiceCollection AddRepositories(this IServiceCollection services)

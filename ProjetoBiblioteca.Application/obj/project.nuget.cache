@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "3qf70XSfudFg3pN/LUzgTcb2sHPa+CwUVaeetVCrSFlM3bEumKoUyk6DpOR+WLGdLgxyYBm4uGsaSG2wF/JuvA==",
+  "dgSpecHash": "QkND+1T23MFBNv+mv0MI+jva0u7aPtTsGhpWLdtdA9YzrK8HvqkNBtRDUdeuHJzwAfTH9KM8pYLIAq92mmzkEw==",
   "success": true,
   "projectFilePath": "/Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Application/ProjetoBiblioteca.Application.csproj",
   "expectedPackageFiles": [
     "/Users/carlosdenil/.nuget/packages/azure.core/1.38.0/azure.core.1.38.0.nupkg.sha512",
     "/Users/carlosdenil/.nuget/packages/azure.identity/1.11.4/azure.identity.1.11.4.nupkg.sha512",
+    "/Users/carlosdenil/.nuget/packages/fluentvalidation/11.5.1/fluentvalidation.11.5.1.nupkg.sha512",
+    "/Users/carlosdenil/.nuget/packages/fluentvalidation.aspnetcore/11.3.0/fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "/Users/carlosdenil/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.5.1/fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "/Users/carlosdenil/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/carlosdenil/.nuget/packages/mediatr/12.4.1/mediatr.12.4.1.nupkg.sha512",
     "/Users/carlosdenil/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",

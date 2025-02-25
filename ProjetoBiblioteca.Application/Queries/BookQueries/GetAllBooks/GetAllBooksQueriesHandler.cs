@@ -19,7 +19,7 @@ public class GetAllBooksQueriesHandler: IRequestHandler<GetAllBooksQueries,Resul
     {
         var books = await _repository.GetAll();
 
-        if (books == null)
+        if (!books.Any())
         {
             return ResultViewModel<List<BookItemViewModel>>.Error("Lista de Livros Vazia");
         }
