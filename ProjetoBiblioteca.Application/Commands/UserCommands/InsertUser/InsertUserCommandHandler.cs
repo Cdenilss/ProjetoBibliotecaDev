@@ -16,7 +16,7 @@ public class InsertUserCommandHandler : IRequestHandler<InsertUserCommand, Resul
     public async Task<ResultViewModel<int>> Handle(InsertUserCommand request, CancellationToken cancellationToken)
     {
         var user =  request.ToEntity();
-        await _repository.Add(user);
-        return ResultViewModel<int>.Sucess(user.Id);
+        var id= await _repository.Add(user);
+        return ResultViewModel<int>.Sucess(id);
     }
 }

@@ -16,7 +16,9 @@ public class InsertBookCommandHandler : IRequestHandler<InsertBookCommand,Result
     {
 
             var book = request.ToEntity();
-            await _repository.Add(book);
-          return ResultViewModel<int>.Sucess(book.Id);
+            
+            var id= await _repository.Add(book);
+          return ResultViewModel<int>.Sucess(id);
+          
     }
 }
