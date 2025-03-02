@@ -38,7 +38,7 @@ namespace ProjetoBiblioteca.Core.Entities
 
         public void Loaned()
         {
-            if (Status == BookStatusEnum.Available && Status != BookStatusEnum.Reserved)
+            if (Status == BookStatusEnum.Available)
             {
                 Status = BookStatusEnum.Loaned;
 

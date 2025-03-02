@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoBiblioteca.Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoBiblioteca.Core", "ProjetoBiblioteca.Core\ProjetoBiblioteca.Core.csproj", "{70BE94EB-7CCE-494F-97C2-3A9C81EDC74C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoBiblioteca.UnitTest", "ProjetoBiblioteca.UnitTest\ProjetoBiblioteca.UnitTest.csproj", "{1F438767-3084-479C-B2A6-FAAD1877AED1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{70BE94EB-7CCE-494F-97C2-3A9C81EDC74C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70BE94EB-7CCE-494F-97C2-3A9C81EDC74C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70BE94EB-7CCE-494F-97C2-3A9C81EDC74C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F438767-3084-479C-B2A6-FAAD1877AED1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F438767-3084-479C-B2A6-FAAD1877AED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F438767-3084-479C-B2A6-FAAD1877AED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F438767-3084-479C-B2A6-FAAD1877AED1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

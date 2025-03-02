@@ -35,4 +35,6 @@ public class Loan : BaseEntity
     {
         return IsOverdue ? "Atrasado" : "Em dia";
     }
+    
+    
 }
