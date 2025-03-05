@@ -6,15 +6,20 @@ namespace ProjetoBiblioteca.Application.Services.Commands.UserCommands.InsertUse
 
 public class InsertUserCommand : IRequest<ResultViewModel<int>>
 {
-    public InsertUserCommand(string name, string email)
+    public InsertUserCommand(string name, string email, string password, string role)
     {
         Name = name;
         Email = email;
+        Password = password;
+        Role = role;
     }
-
+    
     public string Name { get;  set; }
     public string  Email { get;  set; }
+    
+    public string Password { get;  set; }
+    public string Role { get; set; }
 
     public User ToEntity()
-        => new(Name, Email);
+        => new( Name, Email,Password, Role);
 }
