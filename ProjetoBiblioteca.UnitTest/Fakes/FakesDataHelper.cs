@@ -48,7 +48,9 @@ public class FakesDataHelper
     public static readonly Faker<User>_fakerUser= new Faker<User>()
         .CustomInstantiator(f => new User(
             f.Person.FullName,
-            f.Person.Email
+            f.Person.Email,
+            f.Random.Hash(),
+            f.Person.Random.AlphaNumeric(5)
             
         ));
    

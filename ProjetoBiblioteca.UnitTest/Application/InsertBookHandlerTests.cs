@@ -6,6 +6,7 @@ using ProjetoBiblioteca.Core.Entities;
 using ProjetoBiblioteca.Core.Repositories;
 using TestProject2.Fakes;
 using Xunit;
+using CancellationToken = System.Threading.CancellationToken;
 
 namespace TestProject2.Application;
 
@@ -21,7 +22,7 @@ public class InsertBookHandlerTests
         Book? insertedBook = null;
 
         repository.Setup(r => r.Add(It.IsAny<Book>()))
-            .Callback<Book>(b => insertedBook = b) // Captura o livro inserido
+            .Callback<Book>(b => insertedBook = b) 
             .ReturnsAsync(ID);
 
         var command = FakesDataHelper.CreateFakeInsertBookCommand();

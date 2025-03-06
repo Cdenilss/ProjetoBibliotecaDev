@@ -4,6 +4,7 @@ using ProjetoBiblioteca.Core.Entities;
 using ProjetoBiblioteca.Core.Repositories;
 using Xunit;
 using FluentAssertions;
+using TestProject2.Fakes;
 
 namespace TestProject2.Application;
 
@@ -13,7 +14,7 @@ public class DeleteUserHandlerTests
     public async Task UserExists_Delete_Sucess()
     {
         // Arrange
-        var user = new User("UserTest", "user@gmail.com");
+        var user = FakesDataHelper.CreateFakeUser();
 
         var repositoryMock = new Mock<IUserRepository>();
 
