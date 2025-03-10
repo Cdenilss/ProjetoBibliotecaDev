@@ -47,5 +47,10 @@ public class User: BaseEntity
             Name = name;
             Email = email;
         }
+        
+        public void UpdatePassword(string  newPassword)
+        {
+            Password = newPassword;
+        }
     }
 

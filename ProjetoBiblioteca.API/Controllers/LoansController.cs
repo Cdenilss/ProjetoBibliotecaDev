@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoBiblioteca.Application.Commands.LoanCommands.InsertLoan;
 using ProjetoBiblioteca.Application.Queries.LoanQuery.GetAllLoans;
@@ -10,6 +11,7 @@ namespace ProjetoBiblioteca.Controllers
 {
     [Route("api/loans")]
     [ApiController]
+    [Authorize]
     public class LoansController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -20,6 +22,7 @@ namespace ProjetoBiblioteca.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetAll()
         {
             var query = new GetAllLoansQuery();
@@ -30,6 +33,7 @@ namespace ProjetoBiblioteca.Controllers
         }
         
         [HttpGet("{id}")]
+        [Authorize(Roles = "admin,user")]
         public async Task<IActionResult> GetLoanById(int id )
         {
             var result = await _mediator.Send(new GetLoanByIdQuery(id));
@@ -42,6 +46,7 @@ namespace ProjetoBiblioteca.Controllers
             
         }        
         [HttpPost]
+        [Authorize(Roles = "admin")]
         
         public async Task<IActionResult> PostLoan(InsertLoanCommands command)
         {
@@ -50,6 +55,7 @@ namespace ProjetoBiblioteca.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _mediator.Send(new DeleteLoanCommands(id));

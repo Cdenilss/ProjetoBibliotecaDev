@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoBiblioteca.Application.Commands.LoginCommand;
 using ProjetoBiblioteca.Application.Commands.UserCommands.DeleteUser;
+using ProjetoBiblioteca.Application.Commands.UserCommands.PutPasswordRecovery;
 using ProjetoBiblioteca.Application.Models.InputModel;
 using ProjetoBiblioteca.Application.Services.Commands.UserCommands.InsertUser;
 using ProjetoBiblioteca.Application.Services.Commands.UserCommands.PutUser;
@@ -27,6 +28,7 @@ namespace ProjetoBiblioteca.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetAll()
         {
             var query = new GetAllUserQuery();
@@ -35,6 +37,7 @@ namespace ProjetoBiblioteca.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "admin,user")]
         public async Task<IActionResult> FindUserById(int id)
         {
             var result = await _mediator.Send(new FindByIdUserQuery(id));
@@ -72,6 +75,7 @@ namespace ProjetoBiblioteca.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _mediator.Send(new DeleteUserCommand(id));
@@ -91,11 +95,54 @@ namespace ProjetoBiblioteca.Controllers
 
             if (!result.IsSucess)
             {
-                return BadRequest(new { message = result.Message }); 
+                return Unauthorized(new { message = result.Message }); 
             }
 
             return Ok(new { token = result.Data }); 
         }
+        
+        [HttpPost("passoword-recovery/request")]
+        [Authorize(Roles = "user")]
+        
+        public async Task<IActionResult>RequestPasswordRecovery(PasswordRecoveryRequestCommand command)
+        {
+            var result = await _mediator.Send(command);
+            if (!result.IsSucess)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return Ok();
+        }
+        
+        [HttpPost("passoword-recovery/validation")]
+        [Authorize(Roles = "user")]
+        
+        public async Task<IActionResult>RequestPasswordRecovery( PasswordRecoveryValidateCommand command)
+        {
+            var result = await _mediator.Send(command);
+            if (!result.IsSucess)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return Ok();
+        }
+        
+        [HttpPost("passoword-recovery/change")]
+        [Authorize(Roles = "user")]
+        
+        public async Task<IActionResult>RequestPasswordRecovery(PasswordRecoveryChangeCommand command)
+        {
+            var result = await _mediator.Send(command);
+            if (!result.IsSucess)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return Ok();
+        }
+        
 
     }
 }

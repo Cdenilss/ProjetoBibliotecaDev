@@ -42,8 +42,9 @@ public class AuthServices : IAuthService
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         var claims = new[]
         {
-            new Claim(ClaimTypes.Email, email),
-            new Claim(ClaimTypes.Role, role)
+            new Claim(JwtRegisteredClaimNames.Email, email),
+            new Claim(JwtRegisteredClaimNames.Sub, "user_id"), 
+            new Claim(ClaimTypes.Role, role) 
         };
         
         var token= new JwtSecurityToken(issuer, audience, claims, null, DateTime.Now.AddHours(2), signingCredentials: credentials);

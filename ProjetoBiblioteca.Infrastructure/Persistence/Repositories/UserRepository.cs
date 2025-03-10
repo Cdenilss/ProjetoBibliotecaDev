@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using ProjetoBiblioteca.Core.Entities;
 using ProjetoBiblioteca.Core.Repositories;
 using ProjetoBiblioteca.Infrastructure.Auth;
+using ProjetoBiblioteca.Infrastructure.Notification;
 
 namespace ProjetoBiblioteca.Infrastructure.Persistence.Repositories;
 
@@ -9,13 +11,17 @@ public class UserRepository : IUserRepository
 {
     private readonly LibraryDbContext _context;
     private readonly IAuthService _auth;
+    private readonly IEmailServices _emailServices;
+    private readonly IMemoryCache _cache;
 
-    public UserRepository(LibraryDbContext context, IAuthService auth)
+    public UserRepository(LibraryDbContext context, IAuthService auth, IEmailServices emailServices, IMemoryCache cache)
     {
         _context = context;
         _auth = auth;
+        _emailServices = emailServices;
+        _cache = cache;
     }
- 
+   
     public async Task<List<User>> GetAll()
     {
        
@@ -40,7 +46,6 @@ public class UserRepository : IUserRepository
     public async Task<int> Add(User user)
     {
         var hash = _auth.ComputeHash(user.Password);
-        
         await _context.AddAsync(user);
         await _context.SaveChangesAsync();
         return user.Id;
@@ -58,14 +63,23 @@ public class UserRepository : IUserRepository
         await _context.SaveChangesAsync();
     }
 
-    public Task<User> GetByEmail(string requestEmail)
+    public async Task<User> GetByEmail(string requestEmail)
     {
-        return _context.Users.SingleOrDefaultAsync(u => u.Email == requestEmail);
+        return await _context.Users.SingleOrDefaultAsync(u => u.Email == requestEmail);
     }
+
+    public async Task  UpdatePassword( User user,string newPassword)
+    {
+        user.UpdatePassword(newPassword);
+        await _context.SaveChangesAsync();
+    }
+    
 
     public async Task<User?> AuthenticateUser(string email, string password)
     {
        var hashPassword = _auth.ComputeHash(password);
        return await _context.Users.SingleOrDefaultAsync(u => u.Email == email && u.Password == hashPassword);
     }
+    
+   
 }
