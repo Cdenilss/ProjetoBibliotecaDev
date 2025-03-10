@@ -48,13 +48,18 @@ public class FakesDataHelper
     public static readonly Faker<User>_fakerUser= new Faker<User>()
         .CustomInstantiator(f => new User(
             f.Person.FullName,
-            f.Person.Email
+            f.Person.Email,
+            f.Random.Hash(),
+            f.Person.Random.AlphaNumeric(5)
             
         ));
    
     private static readonly Faker<InsertUserCommand> _insertUserCommandFaker = new Faker<InsertUserCommand>()
         .RuleFor(u=>u.Name,f=>f.Person.FullName)
-        .RuleFor(u=>u.Email,f=>f.Person.Email);
+        .RuleFor(u=>u.Email,f=>f.Person.Email)
+        .RuleFor(u=>u.Password,f=>f.Random.Hash())
+        .RuleFor(u=>u.Role,f=>f.Person.Random.AlphaNumeric(5))
+        ;
     
     public static List<User> CreateFakeUserList()=> _fakerUser.Generate(10);
     public static InsertUserCommand CreateFakeInsertUserCommand()=> _insertUserCommandFaker.Generate();

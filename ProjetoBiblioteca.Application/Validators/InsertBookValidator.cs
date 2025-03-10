@@ -12,14 +12,19 @@ public class InsertBookValidator : AbstractValidator<InsertBookCommand>
             .NotEmpty()
                 .WithMessage("Titulo do livro não pode ser vazio")
             .MaximumLength(50)
-            .WithMessage("Tamano de maximo de de caracteres é 50");
+            .WithMessage("Tamanho de maximo de de caracteres é 50");
+        
+        RuleFor(b=>b.Author)
+            .NotEmpty()
+                .WithMessage("Autor do livro não pode ser vazio")
+            .MaximumLength(50)
+            .WithMessage("Tamanho de maximo de de caracteres é 50");
 
         RuleFor(b => b.YearOfPublication)
-            .NotEmpty() 
-                .WithMessage("Titulo do livro não pode ser vazio").GreaterThan(DateTime.Now.Year);
-        
+            .LessThanOrEqualTo(DateTime.Now.Year)
+            .WithMessage($"O ano de publicação não pode ser maior que {DateTime.Now.Year}.");
+
         RuleFor(b => b.ISBN)
-            .NotEmpty().WithMessage("O ISBN é obrigatório.")
-            .Length(10, 13).WithMessage("ISBN inválido.");
+            .NotEmpty().WithMessage("O ISBN é obrigatório.");
     }
 }

@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoBiblioteca.Application.Commands.BookCommands.DeleteBook;
 using ProjetoBiblioteca.Application.Commands.BookCommands.InsertBook;
@@ -9,6 +10,7 @@ using ProjetoBiblioteca.Application.Queries.BookQueries.GetBooksById;
 namespace ProjetoBiblioteca.Controllers;
     [Route("api/Books")]
     [ApiController]
+    [Authorize]
 
 
 public class BooksController : ControllerBase
@@ -22,7 +24,7 @@ public class BooksController : ControllerBase
     }
     
     [HttpGet("{id}")]
-
+    [Authorize(Roles = "user, admin")]
     public async Task<IActionResult> FindBookById(int id)
     {
         var result = await _mediator.Send(new GetBookByIdQueries(id));
@@ -36,9 +38,9 @@ public class BooksController : ControllerBase
     }
     
     [HttpGet]
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> GetAll()
     {
-
         //var result = _services.GetAll();
         var query = new GetAllBooksQueries();
 
@@ -46,9 +48,8 @@ public class BooksController : ControllerBase
         return Ok(result);
         
     }
-    
-     
     [HttpPost]
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> Post(InsertBookCommand command)
     {
         var result = await _mediator.Send(command);
@@ -62,6 +63,7 @@ public class BooksController : ControllerBase
 
     
     [HttpDelete("{id}")]
+    [Authorize (Roles = "admin")]
     public async Task<IActionResult> Delete(int id)
     {
         var result = await _mediator.Send(new DeleteBookCommand(id));

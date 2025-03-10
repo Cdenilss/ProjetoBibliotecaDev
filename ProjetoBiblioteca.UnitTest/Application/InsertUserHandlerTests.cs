@@ -1,5 +1,6 @@
 using FluentAssertions;
 using Moq;
+using ProjetoBiblioteca.Application.Commands.UserCommands.InsertUser;
 using ProjetoBiblioteca.Application.Services.Commands.UserCommands.InsertUser;
 using ProjetoBiblioteca.Core.Entities;
 using ProjetoBiblioteca.Core.Repositories;
@@ -25,7 +26,7 @@ public class InsertUserHandlerTests
         var repository = repositoryMock.Object;
 
         var command = FakesDataHelper.CreateFakeInsertUserCommand();
-        var handler = new InsertUserCommandHandler(repository);
+        var handler = new InsertUserCommandHandler(repositoryMock.Object);
 
         // Act
         var result = await handler.Handle(command, new CancellationToken());

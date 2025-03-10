@@ -12,6 +12,7 @@
 /Users/carlosdenil/RiderProjects/ProjetoBiblioteca.Api/ProjetoBiblioteca.Core/obj/Debug/net8.0/ref/ProjetoBiblioteca.Core.dll
 /Users/carlosdenil/RiderProjects/ProjetoBiblioteca.Api/ProjetoBiblioteca.Core/obj/Debug/net8.0/ProjetoBiblioteca.Core.csproj.AssemblyReference.cache
 /Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/bin/Debug/net8.0/ProjetoBiblioteca.Core.deps.json
+/Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/bin/Debug/net8.0/ProjetoBiblioteca.Core.runtimeconfig.json
 /Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/bin/Debug/net8.0/ProjetoBiblioteca.Core.dll
 /Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/bin/Debug/net8.0/ProjetoBiblioteca.Core.pdb
 /Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/obj/Debug/net8.0/ProjetoBiblioteca.Core.csproj.AssemblyReference.cache
@@ -23,6 +24,5 @@
 /Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/obj/Debug/net8.0/ProjetoBiblioteca.Core.dll
 /Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/obj/Debug/net8.0/refint/ProjetoBiblioteca.Core.dll
 /Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/obj/Debug/net8.0/ProjetoBiblioteca.Core.pdb
-/Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/obj/Debug/net8.0/ref/ProjetoBiblioteca.Core.dll
-/Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/bin/Debug/net8.0/ProjetoBiblioteca.Core.runtimeconfig.json
 /Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/obj/Debug/net8.0/ProjetoBiblioteca.Core.genruntimeconfig.cache
+/Users/carlosdenil/RiderProjects/ProjetoBiblioteca/ProjetoBiblioteca.Core/obj/Debug/net8.0/ref/ProjetoBiblioteca.Core.dll

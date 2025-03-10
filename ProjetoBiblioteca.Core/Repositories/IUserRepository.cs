@@ -10,4 +10,6 @@ public interface IUserRepository
     Task<int> Add(User user);
     Task<bool> Exists(int id);
     Task Update(User user);
+    Task<User> GetByEmail(string requestEmail);
+    Task UpdatePassword(User user,string newPassword);
 }
