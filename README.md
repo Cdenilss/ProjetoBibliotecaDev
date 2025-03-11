@@ -1,73 +1,121 @@
-Projeto Biblioteca API
+# 📚 Projeto Biblioteca API  
 
-Descrição
-O Projeto Biblioteca API é uma aplicação desenvolvida em .NET 8 que oferece funcionalidades para gestão de uma biblioteca, permitindo operações como cadastro de livros, usuários e empréstimos. O projeto segue princípios de Clean Architecture e implementa padrões como CQRS e DDD para assegurar uma estrutura escalável e de fácil manutenção.
+![.NET Core](https://img.shields.io/badge/.NET%208-blue?style=for-the-badge&logo=dotnet)  
+![CQRS](https://img.shields.io/badge/CQRS-MediatR-orange?style=for-the-badge)  
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)  
 
-Arquitetura e Tecnologias
-Clean Architecture: Separação de responsabilidades em camadas distintas.
-CQRS com MediatR: Separação clara entre comandos (Commands) e consultas (Queries).
-Autenticação e Autorização: Implementação de JWT para segurança.
-Validações: Uso do FluentValidation para validação de dados.
-Testes Unitários: Utilização de xUnit, Moq, FluentAssertions e Bogus para garantir a qualidade do código.
-Envio de E-mails: Integração com SendGrid para funcionalidades de comunicação.
-Estrutura do Projeto
-ProjetoBiblioteca.API: Contém os controllers e configurações da API.
-ProjetoBiblioteca.Application: Implementa os casos de uso, comandos, consultas e validações.
-ProjetoBiblioteca.Core: Define as entidades, interfaces e exceções.
-ProjetoBiblioteca.Infrastructure: Gerencia a persistência de dados, repositórios e serviços externos.
-Funcionalidades Principais
-Gerenciamento de Livros: CRUD completo para livros.
-Gerenciamento de Usuários: Cadastro, autenticação e recuperação de senha.
-Gerenciamento de Empréstimos: Controle de empréstimos e devoluções de livros.
-Autenticação e Autorização: Proteção de endpoints com base em roles de usuário.
-Envio de E-mails: Notificações e recuperação de senha via SendGrid.
-Como Executar o Projeto
-Pré-requisitos:
+> API desenvolvida em **.NET 8** para gerenciamento de uma biblioteca, utilizando **Clean Architecture**, **CQRS**, **JWT** e boas práticas de desenvolvimento.  
 
-.NET 8 SDK
-SQL Server ou outro banco de dados configurado.
-SendGrid API Key para envio de e-mails.
-Configuração:
+---
 
-Clone o repositório:
-bash
-Copiar
-Editar
+## Funcionalidades  
+
+✅ **Gerenciamento de Livros** (Cadastro, edição, exclusão, listagem)  
+✅ **Gerenciamento de Usuários** (Autenticação, cadastro, recuperação de senha)  
+✅ **Empréstimos e Devoluções** (Controle sobre empréstimos de livros)  
+✅ **Autenticação e Autorização** (JWT com controle de acesso por roles)  
+✅ **Envio de E-mails** (Recuperação de senha com integração SendGrid)  
+✅ **Testes Unitários** (Cobertura de testes com xUnit, Moq, FluentAssertions e Bogus)  
+
+---
+
+## 🏛️ Arquitetura  
+
+📂 **ProjetoBiblioteca.API** → Controllers e configurações da API  
+📂 **ProjetoBiblioteca.Application** → Casos de uso, validações, comandos e queries  
+📂 **ProjetoBiblioteca.Core** → Entidades, interfaces, regras de negócio  
+📂 **ProjetoBiblioteca.Infrastructure** → Banco de dados, repositórios e serviços externos  
+
+---
+
+## 🚀 Tecnologias  
+
+| Tecnologia       | Descrição |
+|-----------------|-----------|
+| 🔹 **.NET 8**  | Plataforma principal de desenvolvimento |
+| 🔹 **Entity Framework Core** | ORM para acesso ao banco de dados |
+| 🔹 **MediatR** | Implementação do CQRS (Commands e Queries) |
+| 🔹 **JWT** | Autenticação e autorização segura |
+| 🔹 **FluentValidation** | Validação avançada de entrada de dados |
+| 🔹 **SendGrid** | Envio de e-mails para recuperação de senha |
+| 🔹 **xUnit, Moq, FluentAssertions** | Frameworks para testes unitários |
+
+---
+
+## 🛠️ Como Executar  
+
+### 🔹 **Pré-requisitos**  
+
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)  
+- [SQL Server](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads) ou outro banco de dados configurado  
+- Conta no [SendGrid](https://sendgrid.com/) para envio de e-mails  
+
+### 🔹 **Passos para rodar o projeto**  
+
+1️⃣ **Clone o repositório:**  
+```bash
 git clone https://github.com/Cdenilss/ProjetoBibliotecaDev.git
-Configure as strings de conexão e a chave da API do SendGrid no arquivo appsettings.json:
-json
-Copiar
-Editar
+cd ProjetoBibliotecaDev
+```
+
+2️⃣ **Configure as credenciais no `appsettings.json`:**  
+```json
 {
   "ConnectionStrings": {
     "DefaultConnection": "sua_string_de_conexao"
   },
   "SendGrid": {
     "ApiKey": "sua_api_key"
-  },
-  // Outras configurações
+  }
 }
-Migrar o Banco de Dados:
+```
 
-Navegue até o diretório ProjetoBiblioteca.API e aplique as migrações:
-bash
-Copiar
-Editar
+3️⃣ **Aplique as migrações do banco de dados:**  
+```bash
 dotnet ef database update
-Executar a Aplicação:
+```
 
-No diretório ProjetoBiblioteca.API, execute:
-bash
-Copiar
-Editar
-dotnet run
-A API estará disponível em https://localhost:5001 ou conforme configurado.
-Testes
-Para executar os testes unitários:
+4️⃣ **Execute o projeto:**  
+```bash
+dotnet run --project ProjetoBiblioteca.API
+```
+A API estará disponível em `https://localhost:5001`  
 
-Navegue até o diretório ProjetoBiblioteca.Tests.
-Execute:
-bash
-Copiar
-Editar
+---
+
+## ✅ Como Executar os Testes  
+
+Para rodar os testes unitários, execute:  
+```bash
 dotnet test
+```
+
+---
+
+## 📄 Documentação  
+
+A API está documentada com **Swagger**. Após iniciar o projeto, acesse:  
+🔗 [Swagger UI](https://localhost:5001/swagger/index.html)  
+
+---
+
+## 🤝 Contribuição  
+
+💡 **Contribuições são bem-vindas!**  
+
+Se quiser contribuir, siga os passos:  
+1. **Fork** o repositório  
+2. Crie um **branch** para sua feature  
+3. Faça um **commit** bem documentado  
+4. Envie um **pull request**  
+
+---
+
+## 📜 Licença  
+
+📌 Este projeto está sob a licença **MIT**.  
+
+---
+
+🔥 **Feito com 💙 por Denil e colaboradores!** 🚀  
+
