@@ -99,23 +99,4 @@ A API está documentada com **Swagger**. Após iniciar o projeto, acesse:
 
 ---
 
-## 🤝 Contribuição  
-
-💡 **Contribuições são bem-vindas!**  
-
-Se quiser contribuir, siga os passos:  
-1. **Fork** o repositório  
-2. Crie um **branch** para sua feature  
-3. Faça um **commit** bem documentado  
-4. Envie um **pull request**  
-
----
-
-## 📜 Licença  
-
-📌 Este projeto está sob a licença **MIT**.  
-
----
-
-🔥 **Feito com 💙 por Denil e colaboradores!** 🚀  
 
