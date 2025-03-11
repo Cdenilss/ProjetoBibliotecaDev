@@ -1,30 +1,56 @@
-
+# Build outputs
+**/[Bb]in/
+**/[Oo]bj/
 *.dll
-bin/
-obj/
-
 *.pdb
+*.cache
+*.apk
+*.ipa
 
-
+# IDE/Editor
 .vscode/
 .idea/
 .vs/
-
-
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
 
-
+# Dependências
 packages/
 node_modules/
+jspm_packages/
 
-
+# Logs
 *.log
+npm-debug.log*
 
+# Configurações sensíveis
+appsettings.*.json
+!appsettings.json  # Mantém o arquivo base
+*.pubxml
+.env
+.env.local
+*.pfx
+*.cer
 
-*.config
-appsettings*.json
+# Testes
+*.trx
+*.coverage
+coverage.*
 
-.DS_Store
+# Docker/Azure
+docker-compose.override.yml
+.azure/
+
+# NuGet
+NuGet.config
+NuGet.exe
+
+# OS Junk
+**/.DS_Store
+**/.Trashes
+**/[Tt]humbs.db
+**/[Dd]esktop.ini
+*.zip
+*.nupkg
