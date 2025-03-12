@@ -5,6 +5,7 @@ using ProjetoBiblioteca.Application.Commands.BookCommands.DeleteBook;
 using ProjetoBiblioteca.Application.Commands.BookCommands.InsertBook;
 using ProjetoBiblioteca.Application.Queries.BookQueries.GetAllBooks;
 using ProjetoBiblioteca.Application.Queries.BookQueries.GetBooksById;
+using ProjetoBiblioteca.Core.Enums;
 
 
 namespace ProjetoBiblioteca.Controllers;
@@ -24,7 +25,7 @@ public class BooksController : ControllerBase
     }
     
     [HttpGet("{id}")]
-    [Authorize(Roles = "user, admin")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> FindBookById(int id)
     {
         var result = await _mediator.Send(new GetBookByIdQueries(id));
@@ -38,7 +39,7 @@ public class BooksController : ControllerBase
     }
     
     [HttpGet]
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "Admin, User")]
     public async Task<IActionResult> GetAll()
     {
         //var result = _services.GetAll();
@@ -49,7 +50,7 @@ public class BooksController : ControllerBase
         
     }
     [HttpPost]
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Post(InsertBookCommand command)
     {
         var result = await _mediator.Send(command);
@@ -63,7 +64,7 @@ public class BooksController : ControllerBase
 
     
     [HttpDelete("{id}")]
-    [Authorize (Roles = "admin")]
+    [Authorize (Roles = "Admin")]
     public async Task<IActionResult> Delete(int id)
     {
         var result = await _mediator.Send(new DeleteBookCommand(id));

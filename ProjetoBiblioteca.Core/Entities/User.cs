@@ -1,13 +1,14 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore.Update.Internal;
 using ProjetoBiblioteca.Core.Entities;
+using ProjetoBiblioteca.Core.Enums;
 
 
 namespace ProjetoBiblioteca.Core.Entities;
 
 public class User: BaseEntity
 {
-        public User( string name, string email, bool active, List<Loan> loansList, string password, string role)
+        public User( string name, string email, bool active, List<Loan> loansList, string password, RoleUserEnum role)
             : base()
         {
             
@@ -23,7 +24,7 @@ public class User: BaseEntity
         public string Email { get; private set; }
         public bool Active { get; private set; }
         public string Password { get; private set; }
-        public string Role { get; private set; }    
+        public RoleUserEnum Role { get; private set; }    
 
         public List<Loan> LoansList { get; private set; }
 
@@ -31,7 +32,7 @@ public class User: BaseEntity
         {
         } 
 
-        public User(string name, string email, string password, string role)
+        public User(string name, string email, string password, RoleUserEnum role)
             : base()
         {
             Name = name;

@@ -28,7 +28,7 @@ namespace ProjetoBiblioteca.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll()
         {
             var query = new GetAllUserQuery();
@@ -37,7 +37,7 @@ namespace ProjetoBiblioteca.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "admin,user")]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> FindUserById(int id)
         {
             var result = await _mediator.Send(new FindByIdUserQuery(id));
@@ -62,6 +62,7 @@ namespace ProjetoBiblioteca.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> Put(int id, UpdateUserCommand command)
         {
             var result = await _mediator.Send(command);
@@ -75,7 +76,7 @@ namespace ProjetoBiblioteca.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _mediator.Send(new DeleteUserCommand(id));
@@ -102,7 +103,7 @@ namespace ProjetoBiblioteca.Controllers
         }
         
         [HttpPost("passoword-recovery/request")]
-        [Authorize(Roles = "user")]
+        [Authorize(Roles = "User")]
         
         public async Task<IActionResult>RequestPasswordRecovery(PasswordRecoveryRequestCommand command)
         {
@@ -116,7 +117,7 @@ namespace ProjetoBiblioteca.Controllers
         }
         
         [HttpPost("passoword-recovery/validation")]
-        [Authorize(Roles = "user")]
+        [Authorize(Roles = "User")]
         
         public async Task<IActionResult>RequestPasswordRecovery( PasswordRecoveryValidateCommand command)
         {
@@ -130,7 +131,7 @@ namespace ProjetoBiblioteca.Controllers
         }
         
         [HttpPost("passoword-recovery/change")]
-        [Authorize(Roles = "user")]
+        [Authorize(Roles = "User")]
         
         public async Task<IActionResult>RequestPasswordRecovery(PasswordRecoveryChangeCommand command)
         {

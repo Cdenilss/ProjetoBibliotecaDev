@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using ProjetoBiblioteca.Core.Enums;
 
 namespace ProjetoBiblioteca.Infrastructure.Auth;
 
@@ -32,7 +33,7 @@ public class AuthServices : IAuthService
         }
     }
 
-    public string GenerateToken(string email, string role)
+    public string GenerateToken(string email, RoleUserEnum role)
     {
         var issuer= _configuration["Jwt:Issuer"];
         var audience = _configuration["Jwt:Audience"];
@@ -44,7 +45,7 @@ public class AuthServices : IAuthService
         {
             new Claim(JwtRegisteredClaimNames.Email, email),
             new Claim(JwtRegisteredClaimNames.Sub, "user_id"), 
-            new Claim(ClaimTypes.Role, role) 
+            new Claim(ClaimTypes.Role , role.ToString())    
         };
         
         var token= new JwtSecurityToken(issuer, audience, claims, null, DateTime.Now.AddHours(2), signingCredentials: credentials);

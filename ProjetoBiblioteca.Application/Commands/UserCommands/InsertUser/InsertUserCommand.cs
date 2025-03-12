@@ -1,6 +1,7 @@
 using MediatR;
 using ProjetoBiblioteca.Application.Models.ViewModel;
 using ProjetoBiblioteca.Core.Entities;
+using ProjetoBiblioteca.Core.Enums;
 
 namespace ProjetoBiblioteca.Application.Services.Commands.UserCommands.InsertUser;
 
@@ -9,12 +10,12 @@ public class InsertUserCommand : IRequest<ResultViewModel<int>>
     public string Name { get; set; } 
     public string Email { get; set; } 
     public string Password { get; set; } 
-    public string Role { get; set; } 
+    public RoleUserEnum Role { get; set; } 
 
    
     public InsertUserCommand() { }
     
-    public InsertUserCommand(string name, string email, string password, string role)
+    public InsertUserCommand(string name, string email, string password, RoleUserEnum role)
     {
         Name = name;
         Email = email;
