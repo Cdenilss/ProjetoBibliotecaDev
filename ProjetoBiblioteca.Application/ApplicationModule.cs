@@ -1,37 +1,37 @@
 using FluentValidation;
-using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using ProjetoBiblioteca.Application.Commands.BookCommands.InsertBook;
-using ProjetoBiblioteca.Application.Models.ViewModel;
 using ProjetoBiblioteca.Application.Validators;
-
-namespace ProjetoBiblioteca.Application;
 
 public static class ApplicationModule
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services
-            .AddHandlers()
-            .AddValidation();
-        return services;
-    }
-    
-    private static IServiceCollection AddHandlers(this IServiceCollection services)
-    {
-        services.AddMediatR(config =>
-            config.RegisterServicesFromAssemblyContaining<InsertBookCommand>()
-        );
-        services.AddTransient<IPipelineBehavior<InsertBookCommand, ResultViewModel<int>>,
-            ValidateInsertBookCommandBehavior>();
+            .AddMediatRHandlers()
+            .AddFluentValidation();
+
         return services;
     }
 
-    private static IServiceCollection AddValidation(this IServiceCollection services)
+    private static IServiceCollection AddMediatRHandlers(this IServiceCollection services)
     {
-        services.AddFluentValidationAutoValidation()
-            .AddValidatorsFromAssemblyContaining<InsertBookCommand>();
+        // Registra todos os handlers do assembly atual
+        services.AddMediatR(cfg => 
+            cfg.RegisterServicesFromAssembly(typeof(ApplicationModule).Assembly)
+        );
+
+        return services;
+    }
+
+    private static IServiceCollection AddFluentValidation(this IServiceCollection services)
+    {
+        // Registra todos os validadores do assembly atual
+        services.AddValidatorsFromAssemblyContaining<CreateUserValidator>(ServiceLifetime.Scoped);
+
+        // Adiciona o pipeline de validação global
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
         return services;
     }
 }
