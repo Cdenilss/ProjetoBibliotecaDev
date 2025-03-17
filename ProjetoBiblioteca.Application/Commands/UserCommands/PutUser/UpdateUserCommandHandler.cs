@@ -27,6 +27,6 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Resul
         
         await _repository.Update(user);
             
-        return ResultViewModel.Sucess();
+        return ResultViewModel.Success();
     }
 }

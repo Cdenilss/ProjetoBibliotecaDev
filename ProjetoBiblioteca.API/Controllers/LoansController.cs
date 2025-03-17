@@ -38,9 +38,9 @@ namespace ProjetoBiblioteca.Controllers
         {
             var result = await _mediator.Send(new GetLoanByIdQuery(id));
         
-            if (!result.IsSucess)
+            if (!result.IsSuccess)
             {
-                return BadRequest(result.Message);
+                return BadRequest(result.Errors);
             }
             return Ok(result);
             
@@ -59,9 +59,9 @@ namespace ProjetoBiblioteca.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _mediator.Send(new DeleteLoanCommands(id));
-            if (!result.IsSucess)
+            if (!result.IsSuccess)
             {
-                return BadRequest(result.Message);
+                return BadRequest(result.Errors);
             }
 
             return NoContent();

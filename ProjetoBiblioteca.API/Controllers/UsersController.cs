@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoBiblioteca.Application.Commands.LoginCommand;
 using ProjetoBiblioteca.Application.Commands.UserCommands.DeleteUser;
+using ProjetoBiblioteca.Application.Commands.UserCommands.InsertUser;
 using ProjetoBiblioteca.Application.Commands.UserCommands.PutPasswordRecovery;
 using ProjetoBiblioteca.Application.Models.InputModel;
-using ProjetoBiblioteca.Application.Services.Commands.UserCommands.InsertUser;
 using ProjetoBiblioteca.Application.Services.Commands.UserCommands.PutUser;
 using ProjetoBiblioteca.Application.Services.Queries.UserQueries.FindByIdUser;
 using ProjetoBiblioteca.Application.Services.Queries.UserQueries.GetAllUser;
@@ -41,9 +41,9 @@ namespace ProjetoBiblioteca.Controllers
         public async Task<IActionResult> FindUserById(int id)
         {
             var result = await _mediator.Send(new FindByIdUserQuery(id));
-            if (!result.IsSucess)
+            if (!result.IsSuccess)
             {
-                return BadRequest(result.Message);
+                return BadRequest(result.Errors);
             }
 
             return Ok(result);
@@ -57,6 +57,10 @@ namespace ProjetoBiblioteca.Controllers
         {
 
             var result = await _mediator.Send(command);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Errors);
+            }
             return CreatedAtAction(nameof(FindUserById), new { id = result.Data }, command);
 
         }
@@ -66,9 +70,9 @@ namespace ProjetoBiblioteca.Controllers
         public async Task<IActionResult> Put(int id, UpdateUserCommand command)
         {
             var result = await _mediator.Send(command);
-            if (!result.IsSucess)
+            if (!result.IsSuccess)
             {
-                return BadRequest(result.Message);
+                return BadRequest(result.Errors);
             }
 
             return NoContent();
@@ -80,9 +84,9 @@ namespace ProjetoBiblioteca.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _mediator.Send(new DeleteUserCommand(id));
-            if (!result.IsSucess)
+            if (!result.IsSuccess)
             {
-                return BadRequest(result.Message);
+                return BadRequest(result.Errors);
             }
 
             return NoContent();
@@ -94,9 +98,9 @@ namespace ProjetoBiblioteca.Controllers
         {
             var result = await _mediator.Send(command);
 
-            if (!result.IsSucess)
+            if (!result.IsSuccess)
             {
-                return Unauthorized(new { message = result.Message }); 
+                return Unauthorized(new { message = result.Errors }); 
             }
 
             return Ok(new { token = result.Data }); 
@@ -104,13 +108,12 @@ namespace ProjetoBiblioteca.Controllers
         
         [HttpPost("passoword-recovery/request")]
         [Authorize(Roles = "User")]
-        
         public async Task<IActionResult>RequestPasswordRecovery(PasswordRecoveryRequestCommand command)
         {
             var result = await _mediator.Send(command);
-            if (!result.IsSucess)
+            if (!result.IsSuccess)
             {
-                return BadRequest(result.Message);
+                return BadRequest(result.Errors);
             }
 
             return Ok();
@@ -122,9 +125,9 @@ namespace ProjetoBiblioteca.Controllers
         public async Task<IActionResult>RequestPasswordRecovery( PasswordRecoveryValidateCommand command)
         {
             var result = await _mediator.Send(command);
-            if (!result.IsSucess)
+            if (!result.IsSuccess)
             {
-                return BadRequest(result.Message);
+                return BadRequest(result.Errors);
             }
 
             return Ok();
@@ -136,9 +139,9 @@ namespace ProjetoBiblioteca.Controllers
         public async Task<IActionResult>RequestPasswordRecovery(PasswordRecoveryChangeCommand command)
         {
             var result = await _mediator.Send(command);
-            if (!result.IsSucess)
+            if (!result.IsSuccess)
             {
-                return BadRequest(result.Message);
+                return BadRequest(result.Errors);
             }
 
             return Ok();

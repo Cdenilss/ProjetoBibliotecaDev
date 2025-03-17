@@ -1,39 +1,33 @@
-namespace ProjetoBiblioteca.Application.Models.ViewModel;
-
-public class ResultViewModel
+public class ResultViewModel : ResultViewModelBase
 {
-    public ResultViewModel(bool isSucess = true, string message = "")
-    {
-        IsSucess = isSucess;
-        Message = message;
-    }
+    public ResultViewModel(bool isSuccess, string[] errors) 
+        : base(isSuccess, errors) { }
 
-    public bool IsSucess { get; private set; }
-    public string Message  { get; private set; }
-    
-    public static ResultViewModel Sucess()
-        => new ();
-    
-    public static ResultViewModel Error(string message)
-        => new(false, message);
-    
+    public static ResultViewModel Success() 
+        => new ResultViewModel(true, Array.Empty<string>());
+
+    public static ResultViewModel Error(params string[] errors) 
+        => new ResultViewModel(false, errors);
 }
-
-public class ResultViewModel<T> : ResultViewModel
+public class ResultViewModel<T> : ResultViewModelBase
 {
-    public ResultViewModel(T? data, bool isSucess = true, string message = "") : base(isSucess, message)
+    public T? Data { get; private set; }
+
+    public ResultViewModel(T data, string[] errors = null!) 
+        : base(true, errors ?? Array.Empty<string>())
     {
         Data = data;
     }
 
-    public T? Data { get; private set; }
+    public ResultViewModel(bool isSuccess, string[] errors) 
+        : base(isSuccess, errors)
+    {
+        Data = default;
+    }
 
-    public static ResultViewModel<T> Sucess(T data)
-        => new (data);
-    
-    public static ResultViewModel<T> Error(string message)
-        => new(default, false, message);
+    public static ResultViewModel<T> Success(T data)
+        => new ResultViewModel<T>(data);
 
-    
-    
+    public static ResultViewModel<T> Error(params string[] errors)
+        => new ResultViewModel<T>(false, errors);
 }

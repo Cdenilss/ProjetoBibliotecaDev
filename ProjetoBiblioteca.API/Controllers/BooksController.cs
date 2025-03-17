@@ -30,9 +30,9 @@ public class BooksController : ControllerBase
     {
         var result = await _mediator.Send(new GetBookByIdQueries(id));
         
-        if (!result.IsSucess)
+        if (!result.IsSuccess)
         {
-          return BadRequest(result.Message);
+          return BadRequest(result.Errors);
         }
         return Ok(result);
         
@@ -55,9 +55,9 @@ public class BooksController : ControllerBase
     {
         var result = await _mediator.Send(command);
 
-        if (!result.IsSucess)
+        if (!result.IsSuccess)
         {
-            return BadRequest(result.Message);
+            return BadRequest(result.Errors);
         }
         return CreatedAtAction(nameof(FindBookById), new { id = result.Data }, command);
     }
@@ -68,9 +68,9 @@ public class BooksController : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         var result = await _mediator.Send(new DeleteBookCommand(id));
-        if (!result.IsSucess)
+        if (!result.IsSuccess)
         {
-            return BadRequest(result.Message);
+            return BadRequest(result.Errors);
         }
         return NoContent();
     }
