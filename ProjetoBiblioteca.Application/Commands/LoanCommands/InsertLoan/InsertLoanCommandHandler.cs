@@ -32,6 +32,6 @@ public class InsertLoanCommandHandler : IRequestHandler<InsertLoanCommands,Resul
         await _bookRepository.Update(book);
         var loans = request.ToEntity();
         await _repository.Add(loans);
-        return ResultViewModel<int>.Sucess(loans.Id);
+        return ResultViewModel<int>.Success(loans.Id);
     }
 }

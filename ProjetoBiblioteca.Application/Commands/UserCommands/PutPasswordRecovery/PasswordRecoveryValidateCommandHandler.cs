@@ -23,10 +23,10 @@ public class  PasswordRecoveryValidateCommandHandler : IRequestHandler<PasswordR
 
         if (!_cache.TryGetValue(cacheKey, out string? code) || code != request.Code)
         {
-            return ResultViewModel<string>.Error("Código inválido");
+            return ResultViewModel.Error("Código inválido");
         }
         
-        return ResultViewModel.Sucess();
+        return ResultViewModel.Success();
 
     }
 }

@@ -27,6 +27,6 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Resul
         await _repository.Update(user);
         
             
-        return ResultViewModel.Sucess();
+        return ResultViewModel.Success();
     }
 }

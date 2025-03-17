@@ -1,5 +1,4 @@
 using MediatR;
-using ProjetoBiblioteca.Application.Models.ViewModel;
 using ProjetoBiblioteca.Core.Repositories;
 
 namespace ProjetoBiblioteca.Application.Commands.BookCommands.InsertBook;
@@ -18,7 +17,7 @@ public class InsertBookCommandHandler : IRequestHandler<InsertBookCommand,Result
             var book = request.ToEntity();
             
             var id= await _repository.Add(book);
-          return ResultViewModel<int>.Sucess(id);
+          return ResultViewModel<int>.Success(id);
           
     }
 }

@@ -26,6 +26,6 @@ public class GetAllLoansQueryHandler : IRequestHandler<GetAllLoansQuery,ResultVi
 
         var model = loan.Select(l => LoanViewModel.FromEntity(l)).ToList();
 
-        return ResultViewModel<List<LoanViewModel>>.Sucess(model);
+        return ResultViewModel<List<LoanViewModel>>.Success(model);
     }
 }

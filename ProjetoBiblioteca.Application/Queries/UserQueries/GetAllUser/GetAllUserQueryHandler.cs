@@ -25,7 +25,7 @@ public class GetAllUserQueryHandler : IRequestHandler<GetAllUserQuery, ResultVie
         }
 
         var model = user.Select(u => UserViewModel.FromEntity(u)).ToList();
-        return ResultViewModel<List<UserViewModel>>.Sucess(model); 
+        return ResultViewModel<List<UserViewModel>>.Success(model); 
         
     }
 }

@@ -26,6 +26,6 @@ public class GetAllBooksQueriesHandler: IRequestHandler<GetAllBooksQueries,Resul
 
         var model = books.Select(b => BookItemViewModel.FromEntity(b)).ToList();
 
-        return ResultViewModel<List<BookItemViewModel>>.Sucess(model);
+        return ResultViewModel<List<BookItemViewModel>>.Success(model);
     }
 }

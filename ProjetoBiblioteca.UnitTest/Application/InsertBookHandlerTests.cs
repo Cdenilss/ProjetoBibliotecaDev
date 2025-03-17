@@ -32,7 +32,7 @@ public class InsertBookHandlerTests
         var result = await handler.Handle(command, new CancellationToken());
 
         // Assert
-        result.IsSucess.Should().BeTrue("O livro deveria ter sido inserido com sucesso.");
+        result.IsSuccess.Should().BeTrue("O livro deveria ter sido inserido com sucesso.");
         result.Data.Should().Be(ID);
 
         insertedBook.Should().NotBeNull();

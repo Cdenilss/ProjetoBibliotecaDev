@@ -26,7 +26,7 @@ public class PasswordRecoveryRequestCommandHandler : IRequestHandler<PasswordRec
 
         if (user == null)
         {
-            return ResultViewModel<string>.Error("Usuário não encontrado");
+            return ResultViewModel.Error("Usuário não encontrado");
         }
 
         var code = new Random().Next(100000, 999999).ToString();
@@ -35,6 +35,6 @@ public class PasswordRecoveryRequestCommandHandler : IRequestHandler<PasswordRec
 
         await _emailService.SendAsync(user.Email, "Recuperação de senha", $"Seu código de recuperação é: {code}");
 
-        return ResultViewModel.Sucess();
+        return ResultViewModel.Success();
     }
 }

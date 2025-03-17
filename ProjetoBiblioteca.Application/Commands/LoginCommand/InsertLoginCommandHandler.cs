@@ -25,6 +25,6 @@ public class InsertLoginCommandHandler : IRequestHandler<InsertLoginCommand, Res
             return ResultViewModel<string>.Error("Credenciais inválidas.");
 
         var token = _auth.GenerateToken(user.Id.ToString(), user.Role); 
-        return ResultViewModel<string>.Sucess(token);
+        return ResultViewModel<string>.Success(token);
     }
 }

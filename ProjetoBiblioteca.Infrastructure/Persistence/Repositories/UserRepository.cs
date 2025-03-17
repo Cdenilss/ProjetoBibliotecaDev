@@ -44,8 +44,7 @@ public class UserRepository : IUserRepository
         => await _context.Users.SingleOrDefaultAsync(l => l.Id == id);
 
     public async Task<int> Add(User user)
-    {
-        var hash = _auth.ComputeHash(user.Password);
+    { 
         await _context.AddAsync(user);
         await _context.SaveChangesAsync();
         return user.Id;
@@ -73,13 +72,20 @@ public class UserRepository : IUserRepository
         user.UpdatePassword(newPassword);
         await _context.SaveChangesAsync();
     }
-    
+
+    public async Task<bool> IsEmailUniqueAsync(string email)
+    {
+        return !await _context.Users.AnyAsync(u => u.Email == email);
+    }
+
 
     public async Task<User?> AuthenticateUser(string email, string password)
     {
        var hashPassword = _auth.ComputeHash(password);
        return await _context.Users.SingleOrDefaultAsync(u => u.Email == email && u.Password == hashPassword);
     }
+    
+    
     
    
 }

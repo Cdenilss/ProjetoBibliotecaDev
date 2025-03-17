@@ -19,28 +19,29 @@ public class PasswordRecoveryChangeCommandHandler : IRequestHandler<PasswordReco
         _cache = cache;
     }
 
-    public async Task<ResultViewModel> Handle(PasswordRecoveryChangeCommand request, CancellationToken cancellationToken)
+    public async Task<ResultViewModel> Handle(
+        PasswordRecoveryChangeCommand request, 
+        CancellationToken cancellationToken)
     {
         var cacheKey = $"Recovery Code :{request.Email}";
 
+  
         if (!_cache.TryGetValue(cacheKey, out string? code) || code != request.Code)
         {
-            return ResultViewModel<string>.Error("Código inválido");
+            return ResultViewModel.Error("Código inválido"); 
         }
         
         var user = await _userRepository.GetByEmail(request.Email);
-
         if (user == null)
         {
-            return ResultViewModel<string>.Error("Usuário não encontrado");
+            return ResultViewModel.Error("Usuário não encontrado"); 
         }
-      
-        var hash = _authService.ComputeHash(request.NewPassword);
-        await _userRepository.UpdatePassword(user,hash);
         
+        var hash = _authService.ComputeHash(request.NewPassword);
+        await _userRepository.UpdatePassword(user, hash);
+
+        // Remove o código do cache
         _cache.Remove(cacheKey);
 
-        return ResultViewModel.Sucess();
-
-    }
-}
+        return ResultViewModel.Success(); // ✅ Corrige o typo (de Sucess para Success)
+    }}

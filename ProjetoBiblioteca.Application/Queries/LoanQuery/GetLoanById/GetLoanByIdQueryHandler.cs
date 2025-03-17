@@ -23,6 +23,6 @@ public class GetLoanByIdQueryHandler : IRequestHandler<GetLoanByIdQuery,ResultVi
             return ResultViewModel<LoanViewModel>.Error("Erro, emprestimo não encontrado"); 
         }
         var model = LoanViewModel.FromEntity(loans);
-        return ResultViewModel<LoanViewModel>.Sucess(model);
+        return ResultViewModel<LoanViewModel>.Success(model);
     }
 }

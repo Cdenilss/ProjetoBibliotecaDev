@@ -31,7 +31,7 @@ public class DeleteBookHandlerTests
         var result = await handler.Handle(command, new CancellationToken());
 
         // Assert
-        Assert.True(result.IsSucess, "O livro deveria ter sido deletado com sucesso, mas não foi.");
+        Assert.True(result.IsSuccess, "O livro deveria ter sido deletado com sucesso, mas não foi.");
         repository.Verify(r => r.GetById(1), Times.Once);
         repository.Verify(r => r.Update(It.IsAny<Book>()), Times.Once);
     }
@@ -52,7 +52,7 @@ public class DeleteBookHandlerTests
         var result = await handler.Handle(command, new CancellationToken());
 
         // Assert
-        Assert.False(result.IsSucess, "O livro não existe, mas o sistema não retornou erro.");
+        Assert.False(result.IsSuccess, "O livro não existe, mas o sistema não retornou erro.");
         repository.Verify(r => r.GetById(1), Times.Once);
         repository.Verify(r => r.Update(It.IsAny<Book>()), Times.Never); 
     }

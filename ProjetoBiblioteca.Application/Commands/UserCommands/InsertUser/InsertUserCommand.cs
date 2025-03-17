@@ -1,9 +1,8 @@
 using MediatR;
-using ProjetoBiblioteca.Application.Models.ViewModel;
 using ProjetoBiblioteca.Core.Entities;
 using ProjetoBiblioteca.Core.Enums;
 
-namespace ProjetoBiblioteca.Application.Services.Commands.UserCommands.InsertUser;
+namespace ProjetoBiblioteca.Application.Commands.UserCommands.InsertUser;
 
 public class InsertUserCommand : IRequest<ResultViewModel<int>>
 {

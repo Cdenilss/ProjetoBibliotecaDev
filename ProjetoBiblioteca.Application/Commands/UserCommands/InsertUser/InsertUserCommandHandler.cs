@@ -1,6 +1,5 @@
 using MediatR;
 using ProjetoBiblioteca.Application.Models.ViewModel;
-using ProjetoBiblioteca.Application.Services.Commands.UserCommands.InsertUser;
 using ProjetoBiblioteca.Core.Repositories;
 using ProjetoBiblioteca.Infrastructure.Auth;
 
@@ -22,6 +21,6 @@ public class InsertUserCommandHandler : IRequestHandler<InsertUserCommand, Resul
         var hashedPassword = _auth.ComputeHash(request.Password); 
         var user = request.ToEntity(hashedPassword);
         var id= await _repository.Add(user);
-        return ResultViewModel<int>.Sucess(id);
+        return ResultViewModel<int>.Success(id);
     }
 }

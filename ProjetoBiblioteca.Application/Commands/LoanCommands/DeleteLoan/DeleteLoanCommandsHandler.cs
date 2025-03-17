@@ -36,6 +36,6 @@ public class DeleteLoanCommandsHandler : IRequestHandler<DeleteLoanCommands, Res
         }
         loan.SetAsDeleted();
         await _repository.Update(loan);
-        return ResultViewModel.Sucess();
+        return ResultViewModel.Success();
     }
 }

@@ -25,7 +25,7 @@ public class GetBookByIdQueriesHandler : IRequestHandler<GetBookByIdQueries,Resu
         }
 
         var model = BookViewModel.FromEntity(books);
-        return ResultViewModel<BookViewModel>.Sucess(model);
+        return ResultViewModel<BookViewModel>.Success(model);
 
     }
 }

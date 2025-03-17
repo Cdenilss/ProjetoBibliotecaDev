@@ -25,6 +25,6 @@ public class FindByIdUserQueryHandler : IRequestHandler<FindByIdUserQuery, Resul
 
         var model = UserViewModel.FromEntity(user);
 
-        return ResultViewModel<UserViewModel>.Sucess(model);
+        return ResultViewModel<UserViewModel>.Success(model);
     }
 }
