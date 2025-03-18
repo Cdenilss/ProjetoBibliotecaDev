@@ -10,6 +10,7 @@ public interface IBookRepository
     Task<int> Add(Book book);
     Task<bool> Exists(int id);
     Task Update(Book book);
+    Task<bool> ExistsByTitle(string title);
     
 
 }

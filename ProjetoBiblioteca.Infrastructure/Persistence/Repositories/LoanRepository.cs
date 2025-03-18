@@ -15,8 +15,8 @@ public class LoanRepository : ILoanRepository
     public async Task<List<Loan>> GetAll()
     {
         var loans = await _context.Loans.Where(l => !l.IsDeleted)
-            .Include(l => l.User) // 
-            .Include(l => l.Book) // 
+            .Include(l => l.User) 
+            .Include(l => l.Book) 
             .ToListAsync();
         return loans;
     }
@@ -38,7 +38,6 @@ public class LoanRepository : ILoanRepository
         await _context.Loans.AddAsync(loan);
         await _context.SaveChangesAsync();
         return loan.Id;
-        
     }
 
     public async Task<bool> Exists(int id)

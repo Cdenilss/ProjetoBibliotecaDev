@@ -56,5 +56,9 @@ public class BookRepository : IBookRepository
         
         await _context.SaveChangesAsync();
     }
-    
+
+    public async Task<bool> ExistsByTitle(string title)
+    {
+        return await _context.Books.AnyAsync(b=>b.Title == title);
+    }
 }

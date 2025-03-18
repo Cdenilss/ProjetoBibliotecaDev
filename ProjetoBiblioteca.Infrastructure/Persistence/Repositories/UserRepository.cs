@@ -78,6 +78,11 @@ public class UserRepository : IUserRepository
         return !await _context.Users.AnyAsync(u => u.Email == email);
     }
 
+    public Task<bool> ExistLoans(int id)
+    {
+        return _context.Users.AnyAsync(u=>u.Id == id && u.LoansList.Any());
+    }
+
 
     public async Task<User?> AuthenticateUser(string email, string password)
     {

@@ -19,5 +19,9 @@ public class CreateUserValidator : AbstractValidator<InsertUserCommand>
 
         RuleFor(u => u.Name)
             .NotEmpty().WithMessage("Nome é obrigatório.");
+        RuleFor(u=>u.Password)
+            .NotEmpty().WithMessage("Senha é obrigatória.")
+            .MaximumLength(6).WithMessage("Senha deve ter no mínimo 6 caracteres.");
+        
     }
 }

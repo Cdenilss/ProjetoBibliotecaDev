@@ -13,4 +13,5 @@ public interface IUserRepository
     Task<User> GetByEmail(string requestEmail);
     Task UpdatePassword(User user,string newPassword);
     Task<bool> IsEmailUniqueAsync(string email);
+    Task<bool>ExistLoans(int id);
 }
