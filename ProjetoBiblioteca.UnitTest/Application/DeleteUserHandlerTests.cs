@@ -32,7 +32,7 @@ public class DeleteUserHandlerTests
         var result = await handler.Handle(command, new CancellationToken());
 
         // Assert
-        result.IsSucess.Should().BeTrue();
+        result.IsSuccess.Should().BeTrue();
         repositoryMock.Verify(r => r.GetById(1), Times.Once);
         repositoryMock.Verify(r => r.Update(It.IsAny<User>()), Times.Once);
     }
@@ -57,7 +57,7 @@ public class DeleteUserHandlerTests
         var result = await handler.Handle(command, new CancellationToken());
 
         // Assert
-        result.IsSucess.Should().BeFalse();
+        result.IsSuccess.Should().BeFalse();
         repositoryMock.Verify(r => r.GetById(1), Times.Once);
         repositoryMock.Verify(r => r.Update(It.IsAny<User>()), Times.Never);
     }
