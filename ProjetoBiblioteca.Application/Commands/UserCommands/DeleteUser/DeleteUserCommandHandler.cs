@@ -17,12 +17,6 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Resul
     public async Task<ResultViewModel> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
     {
         var user = await _repository.GetById(request.Id);
-
-        if (user is null)
-        {
-            return ResultViewModel.Error("User não encontrado");
-        }
-
         user.SetAsDeleted();
         await _repository.Update(user);
         
