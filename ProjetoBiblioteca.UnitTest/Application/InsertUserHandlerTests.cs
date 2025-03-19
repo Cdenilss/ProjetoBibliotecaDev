@@ -1,9 +1,9 @@
 using FluentAssertions;
 using Moq;
 using ProjetoBiblioteca.Application.Commands.UserCommands.InsertUser;
-using ProjetoBiblioteca.Application.Services.Commands.UserCommands.InsertUser;
 using ProjetoBiblioteca.Core.Entities;
 using ProjetoBiblioteca.Core.Repositories;
+using ProjetoBiblioteca.Infrastructure.Auth;
 using TestProject2.Fakes;
 
 namespace TestProject2.Application;
@@ -16,6 +16,8 @@ public class InsertUserHandlerTests
         // Arrange
         const int ID = 1;
         User? insertedUser = null;
+        
+        var repositoryMockAuth = new Mock<IAuthService>();
 
         var repositoryMock = new Mock<IUserRepository>();
 
@@ -26,13 +28,13 @@ public class InsertUserHandlerTests
         var repository = repositoryMock.Object;
 
         var command = FakesDataHelper.CreateFakeInsertUserCommand();
-        var handler = new InsertUserCommandHandler(repositoryMock.Object);
+        var handler = new InsertUserCommandHandler(repositoryMock.Object,repositoryMockAuth.Object);
 
         // Act
         var result = await handler.Handle(command, new CancellationToken());
 
         // Assert
-        Assert.True(result.IsSucess);
+        Assert.True(result.IsSuccess);
         Assert.Equal(ID, result.Data);
         repositoryMock.Verify(m => m.Add(It.IsAny<User>()), Times.Once);
         

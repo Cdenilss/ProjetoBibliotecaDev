@@ -1,7 +1,7 @@
 using Bogus;
 using ProjetoBiblioteca.Application.Commands.BookCommands.DeleteBook;
 using ProjetoBiblioteca.Application.Commands.BookCommands.InsertBook;
-using ProjetoBiblioteca.Application.Services.Commands.UserCommands.InsertUser;
+using ProjetoBiblioteca.Application.Commands.UserCommands.InsertUser;
 using ProjetoBiblioteca.Core.Entities;
 using ProjetoBiblioteca.Core.Enums;
 
@@ -50,7 +50,7 @@ public class FakesDataHelper
             f.Person.FullName,
             f.Person.Email,
             f.Random.Hash(),
-            f.Person.Random.AlphaNumeric(5)
+            f.PickRandom<RoleUserEnum>()
             
         ));
    
@@ -58,7 +58,7 @@ public class FakesDataHelper
         .RuleFor(u=>u.Name,f=>f.Person.FullName)
         .RuleFor(u=>u.Email,f=>f.Person.Email)
         .RuleFor(u=>u.Password,f=>f.Random.Hash())
-        .RuleFor(u=>u.Role,f=>f.Person.Random.AlphaNumeric(5))
+        .RuleFor(u=>u.Role,f=>f.PickRandom<RoleUserEnum>())
         ;
     
     public static List<User> CreateFakeUserList()=> _fakerUser.Generate(10);
