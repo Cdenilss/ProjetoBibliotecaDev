@@ -61,4 +61,9 @@ public class BookRepository : IBookRepository
     {
         return await _context.Books.AnyAsync(b=>b.Title == title);
     }
+
+    public async Task<bool> LoansActive(int id)
+    {
+        return await _context.Books.AnyAsync(b=>b.Id == id && b.Loans.Any());
+    }
 }
