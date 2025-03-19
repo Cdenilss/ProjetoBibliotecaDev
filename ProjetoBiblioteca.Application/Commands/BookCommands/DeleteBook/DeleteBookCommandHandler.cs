@@ -16,12 +16,6 @@ public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand,Result
     public async Task<ResultViewModel> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
     {
         var book = await _repository.GetById(request.Id);
-
-        if (book == null)
-        {
-            return ResultViewModel.Error("Livro Não encontrado");
-        }
-
         book.SetAsDeleted();
         book.MakesUnavailable();
         await _repository.Update(book);

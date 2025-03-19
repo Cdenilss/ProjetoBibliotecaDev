@@ -11,6 +11,7 @@ public interface IBookRepository
     Task<bool> Exists(int id);
     Task Update(Book book);
     Task<bool> ExistsByTitle(string title);
+    Task<bool>LoansActive(int id);
     
 
 }
