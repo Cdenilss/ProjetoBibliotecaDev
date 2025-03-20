@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Hangfire;
 using ProjetoBiblioteca.Application;
 using ProjetoBiblioteca.ExceptionHandler;
 using ProjetoBiblioteca.Infrastructure;
@@ -19,7 +20,6 @@ builder.Services.AddInfrastrucutre(builder.Configuration);
 
 
 builder.Services.AddApplication();
-
 
 builder.Services.AddControllers().AddJsonOptions(options => 
 {
@@ -69,6 +69,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
+
 app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
@@ -80,9 +81,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-
 app.UseAuthorization();
-
+app.UseHangfireDashboard();
 app.MapControllers();
 
 app.Run();
