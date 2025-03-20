@@ -51,4 +51,14 @@ public class LoanRepository : ILoanRepository
         
         await _context.SaveChangesAsync();
     }
+    
+    public async Task<List<Loan>> GetOverdueLoansAsync()
+    {
+        return await _context.Loans
+            .Include(l => l.Book)
+            .Include(l => l.User)
+            .Where(l => l.ReturnDate < DateTime.Now)
+            .ToListAsync();
+    }
+    
 }

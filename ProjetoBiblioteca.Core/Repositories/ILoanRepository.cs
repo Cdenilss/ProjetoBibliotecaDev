@@ -10,4 +10,5 @@ public interface ILoanRepository
     Task<int> Add(Loan loan);
     Task<bool> Exists(int id);
     Task Update(Loan loan);
+    Task<List<Loan>> GetOverdueLoansAsync();
 }
