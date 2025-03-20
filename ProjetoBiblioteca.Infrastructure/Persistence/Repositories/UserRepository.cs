@@ -11,15 +11,11 @@ public class UserRepository : IUserRepository
 {
     private readonly LibraryDbContext _context;
     private readonly IAuthService _auth;
-    private readonly IEmailServices _emailServices;
-    private readonly IMemoryCache _cache;
 
     public UserRepository(LibraryDbContext context, IAuthService auth, IEmailServices emailServices, IMemoryCache cache)
     {
         _context = context;
         _auth = auth;
-        _emailServices = emailServices;
-        _cache = cache;
     }
    
     public async Task<List<User>> GetAll()
